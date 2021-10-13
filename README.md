@@ -1,29 +1,32 @@
-# My Personal Project
+# My Personal Project - Ben Lu
 
-## Project Name: Light-seconds
+## Project Name: Parsec
 
 ### Purpose
-**What will Light-seconds do?** Light-seconds will be an interactive focus tool for those who wish to give their 
+**What will Parsec do?** Parsec will be an interactive focus tool for those who wish to give their 
 mundane work sessions a splash of colour. The central theme is space exploration, as the user sets timers to work or 
 study, virtual astronauts can be sent to various colonies in our solar system. This creates a sense of progression 
 over time and makes the user's everyday life just a little more interesting.
 
-Time required to go to each location:
-- 15 minutes equates to a trip to the Moon
-- 30 minutes equates to a trip to Mars
-- 60 minutes equates to a trip to Jupiter (Underwater colony on Europa)
-- 90 minutes equates to a trip to Saturn (Colony on Titan)
+Time required for each colony:
+- it will take 15 minutes to reach the Moon
+- it will take 30 minutes to reach Mars
+- it will take 60 minutes to reach Jupiter (Underwater colony on Europa)
+- it will take 90 minutes to reach Saturn (Colony on Titan)
 
 
 Progression System
 
-Each single trip carries 10 astronauts to each colony, and the colonies level up as their number of colonizers 
-increase over time. Each level requires an additional 100 astronauts, starting at level 0 with 0 astronauts. A user 
-can also choose to send 40 astronauts to Moon for a 60 minute trip or 20 astronauts to Mars or 10 to Jupiter. 
+Every minute the user focuses for adds an astronaut to the trip. For example, a 30-minute trip to the Moon adds a 
+total of 30 astronauts to the Moon colony. Note that if one does not reach the required number of minutes to reach 
+a certain destination, they can instead choose a closer location to travel to, such as  a 75-minute trip to Jupiter 
+bringing 75 astronauts to the Jupiter colony as Saturn cannot be reached within 75 minutes. As the number of 
+astronauts on each colony grows, they level up. Each level requires an additional 100 astronauts, starting at level 
+0 with 0 astronauts. 
 
 ### Target Demographic
 
-**Who will use Light-seconds?** Light-seconds will be a user-friendly, minimalistic application. As such, people of 
+**Who will use Parsec?** Parsec will be a user-friendly, minimalistic application. As such, people of 
 any age who are relatively experienced with basic computer operations should be able to access it easily. In terms of 
 who would want to use it, I believe good candidates will mainly be students and adults who strive for better 
 productivity, or even just someone who is a fan of space and wants another reason to focus better during their work 
@@ -37,7 +40,7 @@ it would make for an aesthetically pleasing graphical interface if done correctl
 
 
 ###USER STORIES
-- As a user, I want to be able to add time to the timer in 15 minute increments
-- As a user, I want to be able to choose the destination and amount of astronauts in each trip
+- As a user, I want to be able to add time to the timer (count down)
+- As a user, I want to be able to choose the destination of each trip
 - As a user, I want to be able to see the trips that I have completed
 - As a user, I want to be able to see the levels of my colonies
