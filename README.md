@@ -40,7 +40,7 @@ it would make for an aesthetically pleasing graphical interface if done correctl
 
 
 ###USER STORIES
-- As a user, I want to be able to add time to the timer (count down)
+- As a user, I want to be able to add time to the timer (count down) / create a new trip 
 - As a user, I want to be able to choose the destination of each trip
 - As a user, I want to be able to see the trips that I have completed
 - As a user, I want to be able to see the levels of my colonies
