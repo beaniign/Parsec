@@ -28,13 +28,14 @@ public class ParsecApp {
         initializeTripLog();
 
         boolean mainContinue = true;
-        String mainOption = null;
+        String mainOption;
 
         while (mainContinue) {
             displayMenu();
             mainOption = input.next();
 
             if (mainOption.equals("EXT")) {
+                System.out.println("See you soon!");
                 mainContinue = false;
             } else {
                 handleOptions(mainOption);
@@ -46,32 +47,43 @@ public class ParsecApp {
     // MODIFIES: this
     // EFFECTS: processes the option selected by the user
     protected void handleOptions(String option) {
-        if (option.equals("NEW")) {
-            makeNewTrip();
-        } else if (option.equals("LOG")) {
-            getLog();
-        } else if (option.equals("LVL")) {
-            getLvl();
-        } else {
-            System.out.println("Selection not valid...");
+        switch (option) {
+            case "NEW":
+                makeNewTrip();
+                break;
+            case "LOG":
+                getLog();
+                break;
+            case "LVL":
+                getLvl();
+                break;
+            default:
+                System.out.println("Invalid Selection!");
         }
     }
 
     public void makeNewTrip() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Which location would you like to send your astronauts to?");
+        locationMenu();
         String location = input.next();
-        System.out.println("How long would you like to set the timer for?");
-        int time = input.nextInt();
-        System.out.println("Any notes you would like to add to the journey log?");
-        String note = input.next();
-        Trip myTrip = new Trip(time, location, note);
-        System.out.println("You have selected " + location + "! " + "The journey will take " + time + " minutes!");
-        setLocation(location, time);
-        myTrip.setTimer(time);
-        System.out.println("Time's up!");
-        greet(location);
-        log.addTrip(myTrip);
+        boolean proceed = handleLocation(location);
+
+        if (proceed) {
+            System.out.println("How long would you like to set the timer for?");
+            int time = input.nextInt();
+            System.out.println("Any notes you would like to add to the journey log?");
+            String note = input.next();
+            Trip myTrip = new Trip(time, location, note);
+            System.out.println("You have selected " + location + "! " + "The journey will take " + time + " minutes!");
+            setLocation(location, time);
+            myTrip.setTimer(time);
+            System.out.println("Time's up!");
+            greet(location);
+            log.addTrip(myTrip);
+        } else {
+            System.out.println("Invalid Selection!");
+        }
+
     }
 
     // EFFECTS: displays menu of options to user
@@ -121,6 +133,21 @@ public class ParsecApp {
 
     }
 
+    private boolean handleLocation(String location) {
+        return location.equals("Moon") || location.equals("Mars")
+                || location.equals("Jupiter") || location.equals("Saturn");
+    }
+
+    private void locationMenu() {
+        System.out.println("\nWhere would you like to go?");
+        System.out.println("\t-      -");
+        System.out.println("\tMoon");
+        System.out.println("\tMars");
+        System.out.println("\tJupiter");
+        System.out.println("\tSaturn");
+        System.out.println("\t-      -");
+    }
+
     public void setLocation(String s, int i) {
         if (s.equals("Mars")) {
             mars.addPopulation(i);
@@ -143,7 +170,7 @@ public class ParsecApp {
     public void getLog() {
         Scanner input = new Scanner(System.in);
         boolean logContinue = true;
-        String logOption = null;
+        String logOption;
 
         while (logContinue) {
             displayLogMenu();
@@ -158,23 +185,35 @@ public class ParsecApp {
     }
 
     protected void handleLogOptions(String logOption) {
-        if (logOption.equals("CHK")) {
-            log.displayLogElements();
-        } else if (logOption.equals("CLR")) {
-            log.clearLog();
-            System.out.println("Your log has been cleared!");
-        } else {
-            System.out.println("Selection not valid...");
+        Scanner input = new Scanner(System.in);
+        switch (logOption) {
+            case "CHK":
+                log.displayLogElements();
+                break;
+            case "CLR":
+                log.clearLog();
+                System.out.println("Your log has been cleared!");
+                break;
+            case "DEL":
+                System.out.println("Which trip log would you like to delete? Enter the index please!");
+                int index = (input.nextInt() - 1);
+                log.deleteLogElement(index);
+                System.out.println("Your log entry has been deleted!");
+                break;
+            default:
+                System.out.println("Invalid selection!");
         }
+
     }
 
     private void displayLogMenu() {
-        System.out.println("\nSelect a Log related option from below!");
-        System.out.println("\t- - - - - - - - - - - - - - - -");
+        System.out.println("\nPlease select an option from below:");
+        System.out.println("\t-  -  -  -  -  -  -  -  -  -  -");
         System.out.println("\tCHK -> Check logs");
         System.out.println("\tCLR -> Clear logs");
+        System.out.println("\tDEL -> Delete a specific log");
         System.out.println("\tEXT -> Back to the main menu");
-        System.out.println("\t- - - - - - - - - - - - - - - -");
+        System.out.println("\t-  -  -  -  -  -  -  -  -  -  -");
     }
 
     public void getLvl() {

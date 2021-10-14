@@ -6,7 +6,7 @@ public class Timer {
     private int seconds;
 
     // Constructor
-    // EFFECTS: time has been set to m
+    // EFFECTS: constructs a timer with minutes m
     public Timer(int m) {
         minutes = (m - 1);
         seconds = 60;

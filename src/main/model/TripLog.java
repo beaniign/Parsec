@@ -24,14 +24,18 @@ public class TripLog {
             for (Trip next : trips) {
                 int tnum = (1 + trips.indexOf(next));
                 System.out.println(
-                        "Your trip " + tnum + " was to " + next.location + " with a travel time of "
-                                + next.duration + " minutes. Your journey note was " + "\"" + next.note + "\".");
+                        "Trip " + tnum + " --- location: " + next.location + ", travel time: "
+                                + next.duration + " minutes, journey note: " + "\"" + next.note + "\".");
             }
         }
     }
 
     public void clearLog() {
         trips.clear();
+    }
+
+    public void deleteLogElement(int i) {
+        trips.remove(i);
     }
 
 }
