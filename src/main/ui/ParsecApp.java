@@ -96,7 +96,7 @@ public class ParsecApp {
         }
     }
 
-    // REQUIRES: a non-negative number for the amount of time
+    // REQUIRES: a non-negative integer for the amount of time
     // EFFECTS: starts a timer
     public void setTimer(int t) {
         TripTimer timer = new TripTimer(t);
@@ -152,7 +152,10 @@ public class ParsecApp {
 
     // EFFECTS: returns true if the location selected along with the time selected meets the requirements of each colony
     private boolean checkpoint2(int duration, String location) {
-        if (location.equals("Mars") && duration < 30) {
+        if (location.equals("Moon") && duration < 15) {
+            System.out.println("You cannot reach the Moon in " + duration + " minutes!");
+            return false;
+        } else if (location.equals("Mars") && duration < 30) {
             System.out.println("You cannot reach Mars in " + duration + " minutes!");
             return false;
         } else if (location.equals("Jupiter") && duration < 45) {
