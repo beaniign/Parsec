@@ -45,7 +45,7 @@ public class TripLog {
         if (trips.isEmpty()) {
             throw new EmptyLogException();
         }
-        if (i > trips.size() || i < 0) {
+        if ((i + 1) > trips.size() || i < 0) {
             throw new TripDoesNotExistException();
         }
         trips.remove(i);

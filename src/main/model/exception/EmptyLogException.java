@@ -1,4 +1,6 @@
 package model.exception;
 
-public class EmptyLogException extends Exception{
+public class EmptyLogException extends Exception {
+
+
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.lang.Throwable;
 import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,7 @@ public class TripLogTest {
 
     @BeforeEach
     void runBefore() {
-        this.testTripLog= new TripLog();
+        this.testTripLog = new TripLog();
         this.testTrip1 = new Trip(30, "Mars", "CPSC210");
         this.testTrip2 = new Trip(15, "Moon", "CPSC210");
     }
@@ -39,21 +40,32 @@ public class TripLogTest {
         testTripLog.addTrip(testTrip1);
         testTripLog.addTrip(testTrip2);
         testTripLog.clearLog();
-        assertEquals(0,testTripLog.length());
+        assertEquals(0, testTripLog.length());
     }
 
     @Test
-    void testDeleteLogElement() throws TripDoesNotExistException, EmptyLogException {
+    void testDeleteLogElementTYPICAL() {
         testTripLog.addTrip(testTrip1);
         testTripLog.addTrip(testTrip2);
-        testTripLog.deleteLogElement(1);
-        assertEquals(1, testTripLog.length());
-//        testTripLog.deleteLogElement(1);
-//        assertEquals(0, testTripLog.length());
+        try {
+            testTripLog.deleteLogElement(1);
+            assertEquals(1, testTripLog.length());
+            testTripLog.deleteLogElement(1);
+            assertEquals(0, testTripLog.length());
+        } catch (EmptyLogException | TripDoesNotExistException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
-    void testDisplayLogElementsEmpty(){
-
+    void testDisplayLogElementsEmpty() {
+        assertEquals(0, testTripLog.length());
+        try {
+            testTripLog.deleteLogElement(1);
+            assertEquals(0, testTripLog.length());
+        } catch (EmptyLogException | TripDoesNotExistException e) {
+            e.printStackTrace();
+        }
     }
 }

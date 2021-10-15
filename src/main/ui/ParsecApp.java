@@ -51,7 +51,7 @@ public class ParsecApp {
                 makeNewTrip();
                 break;
             case "LOG":
-                getLog();
+                startLog();
                 break;
             case "LVL":
                 displayLevel();
@@ -174,7 +174,7 @@ public class ParsecApp {
         }
     }
 
-    public void getLog() {
+    public void startLog() {
         boolean logContinue = true;
         String logOption;
 
