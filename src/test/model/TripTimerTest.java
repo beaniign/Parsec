@@ -10,12 +10,12 @@ public class TripTimerTest {
 
     @BeforeEach
     void runBefore() {
-        this.testTimer = new TripTimer(12);
+        this.testTimer = new TripTimer(1);
     }
 
     @Test
     void testGetMinutes(){
-        assertEquals(11, testTimer.getMinutes());
+        assertEquals(0, testTimer.getMinutes());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class TripTimerTest {
     @Test
     void testConstructor(){
         assertEquals(60, testTimer.getSeconds());
-        assertEquals(11, testTimer.getMinutes());
+        assertEquals(0, testTimer.getMinutes());
     }
 
     @Test

@@ -104,12 +104,9 @@ public class TripLogTest {
     }
     @Test
     void testDeleteLogElementDNE3() {
-        testTripLog.addTrip(testTrip1);
 
         try {
-            testTripLog.deleteLogElement(1);
-            assertEquals(0, testTripLog.length());
-            testTripLog.deleteLogElement(-1);
+            testTripLog.deleteLogElement(-2);
         } catch (EmptyLogException | TripDoesNotExistException e) {
             e.printStackTrace();
         }

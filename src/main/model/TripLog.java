@@ -42,10 +42,12 @@ public class TripLog {
         }
         if ((i + 1) > trips.size()) {
             throw new TripDoesNotExistException();
-        } else if (i < 0) {
-            throw new TripDoesNotExistException();
         }
-        trips.remove(i);
+        if (i < 0) {
+            throw new TripDoesNotExistException();
+        } else {
+            trips.remove(i);
+        }
     }
 
 }
