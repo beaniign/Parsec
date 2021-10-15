@@ -197,20 +197,11 @@ public class ParsecApp {
                 checkTripLog();
                 break;
             case "CLR":
-                log.clearLog();
+                log.clearTripLog();
                 System.out.println("Your log has been cleared!");
                 break;
             case "DEL":
-                System.out.println("Enter the index of the trip you would like to delete:");
-                int index = (input.nextInt() - 1);
-                try {
-                    log.deleteLogElement(index);
-                    System.out.println("Your log entry has been deleted!");
-                } catch (EmptyLogException e) {
-                    System.out.println("Your logs are empty!");
-                } catch (TripDoesNotExistException e) {
-                    System.out.println("That log entry does not exist!");
-                }
+                deleteTripLog();
                 break;
             default:
                 System.out.println("Invalid selection!");
@@ -236,6 +227,23 @@ public class ParsecApp {
         }
 
 
+    }
+
+    public void deleteTripLog() {
+        System.out.println("Enter the index of the trip you would like to delete:");
+        int index = (input.nextInt() - 1);
+        if (index < 0) {
+            System.out.println("The index cannot be negative or zero!");
+        } else {
+            try {
+                log.deleteLogElement(index);
+                System.out.println("Your log entry has been deleted!");
+            } catch (EmptyLogException e) {
+                System.out.println("Your logs are empty!");
+            } catch (TripDoesNotExistException e) {
+                System.out.println("That log entry does not exist!");
+            }
+        }
     }
 
     private void displayLogMenu() {

@@ -15,6 +15,7 @@ public class TripTimer {
         seconds = 60;
     }
 
+    //
     public int getMinutes() {
         return minutes;
     }

@@ -32,18 +32,14 @@ public class TripLog {
         return trips.size();
     }
 
-    public void clearLog() {
+    public void clearTripLog() {
         trips.clear();
     }
 
     public void deleteLogElement(int i) throws EmptyLogException, TripDoesNotExistException {
         if (trips.isEmpty()) {
             throw new EmptyLogException();
-        }
-        if ((i + 1) > trips.size()) {
-            throw new TripDoesNotExistException();
-        }
-        if (i < 0) {
+        } else if ((i + 1) > trips.size()) {
             throw new TripDoesNotExistException();
         } else {
             trips.remove(i);
