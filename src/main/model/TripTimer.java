@@ -15,11 +15,19 @@ public class TripTimer {
         seconds = 60;
     }
 
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
     public void update() throws InterruptedException {
 
         while (minutes >= 0) {
             seconds--;
-            Thread.sleep(1000);
+            Thread.sleep(1);
             if (seconds < 10) {
                 System.out.println(minutes + ":0" + seconds);
             } else {

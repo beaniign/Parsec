@@ -51,4 +51,9 @@ public class TripLogTest {
 //        testTripLog.deleteLogElement(1);
 //        assertEquals(0, testTripLog.length());
     }
+
+    @Test
+    void testDisplayLogElementsEmpty(){
+
+    }
 }
