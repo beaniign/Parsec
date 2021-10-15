@@ -7,6 +7,7 @@ import model.exception.TripDoesNotExistException;
 import java.util.List;
 import java.util.Scanner;
 
+// Parsec focus / study tool application
 public class ParsecApp {
 
     private Colony mars;
@@ -62,6 +63,7 @@ public class ParsecApp {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: creates a new trip along with its timer
     public void makeNewTrip() {
         locationMenu();
@@ -94,6 +96,8 @@ public class ParsecApp {
         }
     }
 
+    // REQUIRES: a non-negative number for the amount of time
+    // EFFECTS: starts a timer
     public void setTimer(int t) {
         TripTimer timer = new TripTimer(t);
         try {
@@ -104,10 +108,14 @@ public class ParsecApp {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the trip log
     public void initializeTripLog() {
         this.log = new TripLog();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the colonies
     public void initializeColonies() {
         this.mars = new Colony();
         this.moon = new Colony();
@@ -115,11 +123,13 @@ public class ParsecApp {
         this.saturn = new Colony();
     }
 
+    // EFFECTS: prints out string for each colony after arriving
     public void greet(String s) {
         System.out.println("The level of your " + s + " colony is " + whichColony(s).getLevel());
         System.out.println("The population of your " + s + " colony is " + whichColony(s).getPopulation());
     }
 
+    // EFFECTS: returns each colony according to the user's choice
     public Colony whichColony(String s) {
         switch (s) {
             case "Mars":
@@ -134,11 +144,13 @@ public class ParsecApp {
         return null;
     }
 
+    // EFFECTS: returns true if the location selected is one of the four valid choices
     private boolean checkpoint1(String location) {
         return location.equals("Moon") || location.equals("Mars")
                 || location.equals("Jupiter") || location.equals("Saturn");
     }
 
+    // EFFECTS: returns true if the location selected along with the time selected meets the requirements of each colony
     private boolean checkpoint2(int duration, String location) {
         if (location.equals("Mars") && duration < 30) {
             System.out.println("You cannot reach Mars in " + duration + " minutes!");
@@ -175,6 +187,8 @@ public class ParsecApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: starts the log menu
     public void startLog() {
         boolean logContinue = true;
         String logOption;
@@ -191,6 +205,8 @@ public class ParsecApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user command during the log menu
     protected void handleLogOptions(String logOption) {
         switch (logOption) {
             case "CHK":
@@ -208,8 +224,8 @@ public class ParsecApp {
         }
     }
 
+    // EFFECTS: displays the trips' information that's currently in the trip log, or error message if the log is empty
     public void checkTripLog() {
-
         if (log.isEmptyLog()) {
             System.out.println("Your logs are empty!");
         } else {
@@ -223,12 +239,12 @@ public class ParsecApp {
                                 + "\"" + next.getNote() + "\".");
 
             }
-
         }
-
-
     }
 
+    // MODIFIES: this
+    // EFFECTS: deletes a selected trip from the trip log (by index), or print out error messages when the index
+    //          given is negative or if the trip log is currently empty
     public void deleteTripLog() {
         System.out.println("Enter the index of the trip you would like to delete:");
         int index = (input.nextInt() - 1);
@@ -246,6 +262,7 @@ public class ParsecApp {
         }
     }
 
+    // EFFECTS: displays the log menu with options to view and / or edit the trip log
     private void displayLogMenu() {
         System.out.println("\nPlease select an option from below:");
         System.out.println("\t-  -  -  -  -  -  -  -  -  -  -  -");
@@ -256,6 +273,7 @@ public class ParsecApp {
         System.out.println("\t-  -  -  -  -  -  -  -  -  -  -  -");
     }
 
+    // EFFECTS: displays the level of the colonies
     public void displayLevel() {
         System.out.println("Your Moon colony level is " + moon.getLevel()
                 + " with a total population of " + moon.getPopulation() + "!");
@@ -268,7 +286,7 @@ public class ParsecApp {
 
     }
 
-    // EFFECTS: displays location menu of options to user
+    // EFFECTS: displays the available locations to the user
     private void locationMenu() {
         System.out.println("\nWhere would you like to go?");
         System.out.println("\t+   -   -   -   -   -   -   -   +");
