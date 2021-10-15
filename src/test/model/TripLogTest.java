@@ -74,8 +74,19 @@ public class TripLogTest {
         try {
             testTripLog.deleteLogElement(1);
             assertEquals(1, testTripLog.length());
+        } catch (EmptyLogException | TripDoesNotExistException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @Test
+    void testDeleteLogElementDNE() {
+        testTripLog.addTrip(testTrip1);
+
+        try {
             testTripLog.deleteLogElement(1);
             assertEquals(0, testTripLog.length());
+            testTripLog.deleteLogElement(1);
         } catch (EmptyLogException | TripDoesNotExistException e) {
             e.printStackTrace();
         }
@@ -83,7 +94,7 @@ public class TripLogTest {
     }
 
     @Test
-    void testDisplayLogElementsEmpty() {
+    void testDeleteLogElementsEmpty() {
         assertEquals(0, testTripLog.length());
         try {
             testTripLog.deleteLogElement(1);
