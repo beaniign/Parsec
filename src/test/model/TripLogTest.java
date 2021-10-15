@@ -1,10 +1,11 @@
 package model;
 
-import java.lang.Throwable;
 import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,8 +24,31 @@ public class TripLogTest {
     }
 
     @Test
+    void testConvertTripLogToList(){
+        testTripLog.addTrip(testTrip1);
+        testTripLog.addTrip(testTrip2);
+        List<Trip> testList = testTripLog.convertTripLogToList();
+        assertEquals(2, testList.size());
+        assertFalse(testList.isEmpty());
+        testList.remove(0);
+        testList.remove(0);
+        assertTrue(testList.isEmpty());
+    }
+    @Test
     void testConstructor() {
         assertEquals(0, testTripLog.length());
+    }
+
+    @Test
+    void testIsEmptyLogTRUE(){
+        assertTrue(testTripLog.isEmptyLog());
+    }
+
+    @Test
+    void testIsEmptyLogFALSE(){
+        testTripLog.addTrip(testTrip1);
+        testTripLog.addTrip(testTrip2);
+        assertFalse(testTripLog.isEmptyLog());
     }
 
     @Test

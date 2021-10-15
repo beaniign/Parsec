@@ -13,15 +13,15 @@ public class Trip {
         this.location = location;
     }
 
-    protected int getDuration() {
+    public int getDuration() {
         return duration;
     }
 
-    protected String getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    protected String getNote() {
+    public String getNote() {
         return note;
     }
 }

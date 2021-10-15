@@ -4,6 +4,7 @@ import model.*;
 import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ParsecApp {
@@ -193,7 +194,7 @@ public class ParsecApp {
     protected void handleLogOptions(String logOption) {
         switch (logOption) {
             case "CHK":
-                log.displayLogElements();
+                checkTripLog();
                 break;
             case "CLR":
                 log.clearLog();
@@ -210,11 +211,31 @@ public class ParsecApp {
                 } catch (TripDoesNotExistException e) {
                     System.out.println("That log entry does not exist!");
                 }
-
                 break;
             default:
                 System.out.println("Invalid selection!");
         }
+    }
+
+    public void checkTripLog() {
+
+        if (log.isEmptyLog()) {
+            System.out.println("Your logs are empty!");
+        } else {
+            List<Trip> trips;
+            trips = log.convertTripLogToList();
+            for (Trip next : trips) {
+                int tnum = (1 + trips.indexOf(next));
+                System.out.println(
+                        "Trip " + tnum + " --- location: " + next.getLocation() + ", travel time: "
+                                + next.getDuration() + " minutes, journey note: "
+                                + "\"" + next.getNote() + "\".");
+
+            }
+
+        }
+
+
     }
 
     private void displayLogMenu() {

@@ -20,17 +20,12 @@ public class TripLog {
     }
 
     // EFFECTS: returns strings with the information of each trip in the log
-    public void displayLogElements() {
-        if (trips.isEmpty()) {
-            System.out.println("You have not been on any journeys yet!");
-        } else {
-            for (Trip next : trips) {
-                int tnum = (1 + trips.indexOf(next));
-                System.out.println(
-                        "Trip " + tnum + " --- location: " + next.location + ", travel time: "
-                                + next.duration + " minutes, journey note: " + "\"" + next.note + "\".");
-            }
-        }
+    public List<Trip> convertTripLogToList() {
+        return trips;
+    }
+
+    public boolean isEmptyLog() {
+        return trips.isEmpty();
     }
 
     public int length() {
