@@ -14,14 +14,25 @@ public class TripTest {
     }
 
     @Test
+    void getDuration(){
+        assertEquals(15, testTrip.getDuration());
+    }
+
+    @Test
+    void getLocation(){
+        assertEquals("Mars", testTrip.getLocation());
+    }
+
+    @Test
+    void getNote(){
+        assertEquals("CPSC210", testTrip.getNote());
+    }
+    @Test
     void testConstructor(){
         assertEquals(15, testTrip.getDuration());
         assertEquals("Mars", testTrip.getLocation());
         assertEquals("CPSC210", testTrip.getNote());
     }
 
-    @Test
-    void testSetTimer(){
 
-    }
 }

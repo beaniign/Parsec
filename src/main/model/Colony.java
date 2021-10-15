@@ -10,21 +10,23 @@ public class Colony {
         this.population = 0;
     }
 
-    public void setLevel() {
-        this.level = Math.floorDiv(population, 100);
+    public int getPopulation() {
+        return population;
     }
 
     public int getLevel() {
         return level;
     }
 
+    public void setLevel() {
+        this.level = Math.floorDiv(population, 100);
+    }
+
     public void addPopulation(int colonizers) {
         this.population += colonizers;
     }
 
-    public int getPopulation() {
-        return population;
-    }
+
 
 }
 
