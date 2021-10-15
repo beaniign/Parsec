@@ -1,8 +1,5 @@
 package model;
 
-import model.exception.TimeTooLongException;
-import model.exception.TimeTooShortException;
-
 public class Trip {
 
     protected int duration;
@@ -16,17 +13,15 @@ public class Trip {
         this.location = location;
     }
 
-    public void setTimer(int t) {
-//        if (t < 15) {
-//            throw new TimeTooShortException();
-//        }
-//        if (t > 120) {
-//            throw new TimeTooLongException();
-//        }
-        Timer timer = new Timer(t);
-        timer.update();
+    protected int getDuration() {
+        return duration;
     }
 
+    protected String getLocation() {
+        return location;
+    }
 
-
+    protected String getNote() {
+        return note;
+    }
 }
