@@ -335,7 +335,7 @@ public class ParsecApp {
             jsonWriter.open();
             jsonWriter.write(log);
             jsonWriter.close();
-            System.out.println("Saved " + " to " + JSON_STORE);
+            System.out.println("Saved to your log book!");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -346,10 +346,37 @@ public class ParsecApp {
     private void loadTripLog() {
         try {
             log = jsonReader.read();
-            System.out.println("Loaded " + " from " + JSON_STORE);
+            System.out.println("Loaded from your log book!");
+            lvlSetupFromSaved();
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
+    private void lvlSetupFromSaved() {
+        List<Trip> trips;
+        trips = log.convertTripLogToList();
+        for (Trip next : trips) {
+            switch (next.getLocation()) {
+                case "Mars":
+                    mars.addPopulation(next.getDuration());
+                    mars.setLevel();
+                    break;
+                case "Moon":
+                    moon.addPopulation(next.getDuration());
+                    moon.setLevel();
+                    break;
+                case "Jupiter":
+                    jupiter.addPopulation(next.getDuration());
+                    jupiter.setLevel();
+                    break;
+                case "Saturn":
+                    saturn.addPopulation(next.getDuration());
+                    saturn.setLevel();
+                    break;
+            }
+        }
+    }
+
 }
 
