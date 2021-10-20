@@ -2,6 +2,8 @@ package model;
 
 import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;

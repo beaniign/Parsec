@@ -34,9 +34,9 @@ public class TripTimerTest {
         try {
             testTimer.update();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            fail("Exception thrown");
         }
-        assertEquals(-1, testTimer.getMinutes());
-        assertEquals(60, testTimer.getSeconds());
+        assertEquals(0, testTimer.getMinutes());
+        assertEquals(0, testTimer.getSeconds());
     }
 }

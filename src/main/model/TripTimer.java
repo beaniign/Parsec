@@ -31,7 +31,7 @@ public class TripTimer {
 
         while (minutes >= 0) {
             seconds--;
-            Thread.sleep(1000);
+            Thread.sleep(0);
             if (seconds < 10) {
                 System.out.println(minutes + ":0" + seconds);
             } else {
@@ -42,6 +42,7 @@ public class TripTimer {
                 minutes--;
             }
         }
-
+        minutes = 0;
+        seconds = 0;
     }
 }

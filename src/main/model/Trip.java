@@ -1,5 +1,7 @@
 package model;
 
+import org.json.JSONObject;
+
 // Represents a trip with duration, location, and a trip note
 public class Trip {
 
