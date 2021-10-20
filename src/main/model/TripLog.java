@@ -4,12 +4,13 @@ import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import persistence.Writable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a list of trips
-public class TripLog {
+public class TripLog implements Writable {
     private List<Trip> trips;
 
     // EFFECTS: instantiates a new trip log with no trips inside
@@ -56,6 +57,24 @@ public class TripLog {
         } else {
             trips.remove(i);
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("trips", thingiesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray thingiesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Trip t : trips) {
+            jsonArray.put(t.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

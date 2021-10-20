@@ -1,9 +1,10 @@
 package model;
 
 import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents a trip with duration, location, and a trip note
-public class Trip {
+public class Trip implements Writable {
 
     protected int duration;
     protected String location;
@@ -30,5 +31,14 @@ public class Trip {
     // EFFECTS: returns the value of a trip's note as a string
     public String getNote() {
         return note;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("duration", duration);
+        json.put("location", location);
+        json.put("note", note);
+        return json;
     }
 }

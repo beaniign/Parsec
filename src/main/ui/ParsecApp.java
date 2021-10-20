@@ -3,12 +3,19 @@ package ui;
 import model.*;
 import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 // Parsec focus / study tool application
 public class ParsecApp {
+    private static final String JSON_STORE = "./data/workroom.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     private Colony mars;
     private Colony moon;
@@ -27,6 +34,8 @@ public class ParsecApp {
     private void startParsec() {
         initializeColonies();
         initializeTripLog();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         input = new Scanner(System.in);
 
         boolean mainContinue = true;
@@ -57,6 +66,12 @@ public class ParsecApp {
                 break;
             case "LVL":
                 displayLevel();
+                break;
+            case "LOD":
+                loadTripLog();
+                break;
+            case "SAV":
+                saveTripLog();
                 break;
             default:
                 System.out.println("Invalid Selection!");
@@ -278,6 +293,7 @@ public class ParsecApp {
 
     // EFFECTS: displays the level of the colonies
     public void displayLevel() {
+
         System.out.println("Your Moon colony level is " + moon.getLevel()
                 + " with a total population of " + moon.getPopulation() + "!");
         System.out.println("Your Mars colony level is " + mars.getLevel()
@@ -307,9 +323,33 @@ public class ParsecApp {
         System.out.println("\tNEW -> New trip");
         System.out.println("\tLOG -> Check and edit trip logs");
         System.out.println("\tLVL -> Check your colony Levels");
+        System.out.println("\tSAV -> Save your trip log");
+        System.out.println("\tLOD -> Load your saved trip logs");
         System.out.println("\tEXT -> Exit the program");
         System.out.println("\t-------------------------------");
     }
 
+    // EFFECTS: saves the workroom to file
+    private void saveTripLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(log);
+            jsonWriter.close();
+            System.out.println("Saved " + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadTripLog() {
+        try {
+            log = jsonReader.read();
+            System.out.println("Loaded " + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
 }
 
