@@ -62,7 +62,7 @@ class JsonWriterTest extends JsonTest {
             checkTrip(45, "Mars", "CPSC 210", trips.get(1));
 
         } catch (IOException e) {
-            //
+            fail("Exception should not have been thrown");
         }
     }
 }
