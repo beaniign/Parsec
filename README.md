@@ -40,8 +40,14 @@ it would make for an aesthetically pleasing graphical interface if done correctl
 
 
 ###USER STORIES
+**PHASE 1**
+
 - As a user, I want to be able to set a count-down timer / create a new trip 
 - As a user, I want to be able to choose the destination of each trip
 - As a user, I want to be able to add my trips to my trip logs
 - As a user, I want to be able to see my trip logs and edit them
 - As a user, I want to be able to see the levels of my colonies
+
+**PHASE 2**
+- As a user, I want to be able to save my trips as well as the levels of my colonies resulting from those trips
+- As a user, I want to be able to have the option of loading my saved trips from file
