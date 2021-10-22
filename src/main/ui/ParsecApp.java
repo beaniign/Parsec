@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 // Parsec focus / study tool application
 public class ParsecApp {
-    private static final String JSON_STORE = "./data/workroom.json";
+    private static final String SAVED_LOGS = "./data/workroom.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -34,8 +34,8 @@ public class ParsecApp {
     private void startParsec() {
         initializeColonies();
         initializeTripLog();
-        jsonWriter = new JsonWriter(JSON_STORE);
-        jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(SAVED_LOGS);
+        jsonReader = new JsonReader(SAVED_LOGS);
         input = new Scanner(System.in);
 
         boolean mainContinue = true;
@@ -337,7 +337,7 @@ public class ParsecApp {
             jsonWriter.close();
             System.out.println("Saved to your log book!");
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+            System.out.println("Unable to write to file: " + SAVED_LOGS);
         }
     }
 
@@ -349,7 +349,7 @@ public class ParsecApp {
             System.out.println("Loaded from your log book!");
             lvlSetupFromSaved();
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+            System.out.println("Unable to read from file: " + SAVED_LOGS);
         }
     }
 
