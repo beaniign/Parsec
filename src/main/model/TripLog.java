@@ -9,6 +9,8 @@ import persistence.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
+// This class references code from JsonSerializationDemo
+// url: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Represents a list of trips
 public class TripLog implements Writable {
     private List<Trip> trips;
@@ -39,6 +41,11 @@ public class TripLog implements Writable {
         return trips.size();
     }
 
+    // EFFECTS: returns the ith trip
+    public Trip getTrip(int i) {
+        return trips.get(i);
+    }
+
     // MODIFIES: this
     // EFFECTS: removes all elements within a trip log
     public void clearTripLog() {
@@ -62,12 +69,12 @@ public class TripLog implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("trips", thingiesToJson());
+        json.put("trips", tripsToJson());
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray thingiesToJson() {
+    // EFFECTS: returns trips in this workroom as a JSON array
+    private JSONArray tripsToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Trip t : trips) {

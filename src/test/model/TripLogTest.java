@@ -121,4 +121,11 @@ public class TripLogTest {
             fail("Incorrect Exception");
         }
     }
+
+    @Test
+    void testGetTrip() {
+        testTripLog.addTrip(testTrip1);
+        testTripLog.addTrip(testTrip2);
+        assertEquals(testTrip1,testTripLog.getTrip(0));
+    }
 }

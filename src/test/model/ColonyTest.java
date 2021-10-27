@@ -45,4 +45,18 @@ public class ColonyTest {
         testColony.setLevel();
         assertEquals(1,testColony.getLevel());
     }
+
+    @Test
+    void testRemovePopulation() {
+        testColony.addPopulation(100);
+        testColony.removePopulation(50);
+        assertEquals(50,testColony.getPopulation());
+    }
+
+    @Test
+    void testResetPopultion() {
+        testColony.addPopulation(100);
+        testColony.resetPopulation();
+        assertEquals(0, testColony.getPopulation());
+    }
 }

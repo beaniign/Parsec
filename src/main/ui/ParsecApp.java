@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+// This class references code from JsonSerializationDemo
+// url: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Parsec focus / study tool application
 public class ParsecApp {
     private static final String SAVED_LOGS = "./data/workroom.json";
@@ -23,6 +25,7 @@ public class ParsecApp {
     private Colony saturn;
     private TripLog log;
     private Scanner input;
+    private boolean isSaved;
 
     // EFFECTS: runs Parsec
     public ParsecApp() {
@@ -34,6 +37,7 @@ public class ParsecApp {
     private void startParsec() {
         initializeColonies();
         initializeTripLog();
+        isSaved = false;
         jsonWriter = new JsonWriter(SAVED_LOGS);
         jsonReader = new JsonReader(SAVED_LOGS);
         input = new Scanner(System.in);
@@ -46,11 +50,26 @@ public class ParsecApp {
             mainOption = input.next();
 
             if (mainOption.equals("EXT")) {
+                if (!isSaved) {
+                    promptToSave();
+                }
                 System.out.println("See you soon!");
                 mainContinue = false;
             } else {
                 handleOptions(mainOption);
             }
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: asks the user if they wish to save before quitting the application
+    private void promptToSave() {
+        System.out.println("Trips not saved, would you like to save them to your log book?");
+        System.out.println("\tY -> Save and quit");
+        System.out.println("\tN -> Quit");
+        String saveOption = input.next();
+        if (saveOption.equals("Y")) {
+            saveTripLog();
         }
     }
 
@@ -98,7 +117,7 @@ public class ParsecApp {
                 System.out.println("Time's up...we have arrived!");
                 greet(location);
                 log.addTrip(myTrip);
-
+                isSaved = false;
             } else {
                 makeNewTrip();
             }
@@ -231,14 +250,43 @@ public class ParsecApp {
                 checkTripLog();
                 break;
             case "CLR":
-                log.clearTripLog();
-                System.out.println("Your log has been cleared!");
+                promptToClear();
                 break;
             case "DEL":
-                deleteTripLog();
+                promptToDelete();
                 break;
             default:
                 System.out.println("Invalid selection!");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: confirms with user that they wish to clear the trip logs and warns of the effects of their action
+    private void promptToClear() {
+        System.out.println("This action will effectively reset all of your colonies back to their initial state, "
+                + "proceed?");
+        System.out.println("\tY -> Yes, proceed");
+        System.out.println("\tN -> No, return");
+        String deleteOption = input.next();
+        if (deleteOption.equals("Y")) {
+            clearTripLog();
+        } else {
+            startLog();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: confirms with user that they wish to delete a trip and warns of the effects of their action
+    private void promptToDelete() {
+        System.out.println("This action will effectively remove the population and level associated with the "
+                + "removed trip, proceed?");
+        System.out.println("\tY -> Yes, proceed");
+        System.out.println("\tN -> No, return");
+        String deleteOption = input.next();
+        if (deleteOption.equals("Y")) {
+            deleteTripLog();
+        } else {
+            startLog();
         }
     }
 
@@ -261,7 +309,8 @@ public class ParsecApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: deletes a selected trip from the trip log (by index), or print out error messages when the index
+    // EFFECTS: deletes a selected trip from the trip log (by index) and removes the population associated with that
+    //          trip, or print out error messages when the index
     //          given is negative or if the trip log is currently empty
     public void deleteTripLog() {
         System.out.println("Enter the index of the trip you would like to delete:");
@@ -270,14 +319,56 @@ public class ParsecApp {
             System.out.println("The index cannot be negative or zero!");
         } else {
             try {
+                removePopulation(log.getTrip(index));
                 log.deleteLogElement(index);
                 System.out.println("Your log entry has been deleted!");
+                isSaved = false;
             } catch (EmptyLogException e) {
                 System.out.println("Your logs are empty!");
             } catch (TripDoesNotExistException e) {
                 System.out.println("That log entry does not exist!");
             }
         }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: clears the current trip log and resets all colonies to initial values
+    public void clearTripLog() {
+        log.clearTripLog();
+        mars.resetPopulation();
+        moon.resetPopulation();
+        jupiter.resetPopulation();
+        saturn.resetPopulation();
+        mars.setLevel();
+        moon.setLevel();
+        jupiter.setLevel();
+        saturn.setLevel();
+        System.out.println("Your log has been cleared!");
+        isSaved = false;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes population from a colony and set their levels according to the new population
+    public void removePopulation(Trip deletedTrip) {
+        switch (deletedTrip.getLocation()) {
+            case "Mars":
+                mars.removePopulation(deletedTrip.getDuration());
+                mars.setLevel();
+                break;
+            case "Moon":
+                moon.removePopulation(deletedTrip.getDuration());
+                moon.setLevel();
+                break;
+            case "Jupiter":
+                jupiter.removePopulation(deletedTrip.getDuration());
+                jupiter.setLevel();
+                break;
+            case "Saturn":
+                saturn.removePopulation(deletedTrip.getDuration());
+                saturn.setLevel();
+                break;
+        }
+
     }
 
     // EFFECTS: displays the log menu with options to view and / or edit the trip log
@@ -329,12 +420,13 @@ public class ParsecApp {
         System.out.println("\t-------------------------------");
     }
 
-    // EFFECTS: saves the workroom to file
+    // EFFECTS: saves the workroom to file and tells the application that the current trips are saved
     private void saveTripLog() {
         try {
             jsonWriter.open();
             jsonWriter.write(log);
             jsonWriter.close();
+            isSaved = true;
             System.out.println("Saved to your log book!");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + SAVED_LOGS);

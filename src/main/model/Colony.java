@@ -35,7 +35,18 @@ public class Colony {
         this.population += colonizers;
     }
 
+    // MODIFIES: this
+    // EFFECTS: subtracts the amount given from the current population and sets that as the new population
+    //          mainly used for when a trip is deleted
+    public void removePopulation(int colonizers) {
+        this.population -= colonizers;
+    }
 
+    // MODIFIES: this
+    // EFFECTS: resets the population of a colony, used for when an entire trip log is cleared
+    public void resetPopulation() {
+        this.population = 0;
+    }
 
 
 }
