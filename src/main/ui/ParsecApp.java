@@ -15,7 +15,7 @@ import java.util.Scanner;
 // url: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Parsec focus / study tool application
 public class ParsecApp {
-    private static final String SAVED_LOGS = "./data/workroom.json";
+    private static final String SAVED_LOGS = "./data/logbook.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 

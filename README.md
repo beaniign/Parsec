@@ -8,14 +8,14 @@ mundane work sessions a splash of colour. The central theme is space exploration
 study, virtual astronauts can be sent to various colonies in our solar system. This creates a sense of progression 
 over time and makes the user's everyday life just a little more interesting.
 
-Time required for each colony:
+**Time required for each colony:**
 - it will take 15 minutes to reach the Moon
 - it will take 30 minutes to reach Mars
 - it will take 45 minutes to reach Jupiter
 - it will take 60 minutes to reach Saturn
 
 
-Progression System
+**Progression System**
 
 Every minute the user focuses for adds an astronaut to the trip. For example, a 30-minute trip to the Moon adds a 
 total of 30 astronauts to the Moon colony. Note that if one does not reach the required number of minutes to reach 
@@ -51,3 +51,4 @@ it would make for an aesthetically pleasing graphical interface if done correctl
 **PHASE 2**
 - As a user, I want to be able to save my trips as well as the levels of my colonies resulting from those trips
 - As a user, I want to be able to have the option of loading my saved trips from file
+- As a user, I want to be prompted to save my trips when I attempt to exit the program with unsaved edits
