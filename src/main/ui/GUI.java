@@ -62,6 +62,12 @@ public class GUI {
         frame.revalidate();
     }
 
+    public void switchBackToMain() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(mainPanel);
+        frame.revalidate();
+    }
+
     public void switchToQuitPanel() {
         System.exit(0);
     }
