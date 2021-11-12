@@ -26,7 +26,7 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterEmptyWorkroom() {
+    void testWriterEmptyTripLog() {
         try {
             TripLog tripLog = new TripLog();
             JsonWriter writer = new JsonWriter("./data/testWriterEmptyTripLog.json");
@@ -43,7 +43,7 @@ class JsonWriterTest extends JsonTest {
     }
 
     @Test
-    void testWriterGeneralWorkroom() {
+    void testWriterGeneralTripLog() {
         try {
             TripLog tripLog = new TripLog();
             tripLog.addTrip(new Trip(20,"Moon", "CPSC 210"));

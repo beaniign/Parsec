@@ -40,7 +40,7 @@ class JsonReaderTest extends JsonTest {
 
 
     @Test
-    void testReaderGeneralWorkRoom() {
+    void testReaderGeneralTripLog() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralTripLog.json");
         try {
             TripLog tripLog = reader.read();
