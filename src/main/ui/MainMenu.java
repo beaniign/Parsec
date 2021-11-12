@@ -41,7 +41,6 @@ public class MainMenu extends JPanel implements ActionListener {
 
     @SuppressWarnings("methodlength")
     public void buttonsSetUp() {
-
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
         } catch (FontFormatException e) {

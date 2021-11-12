@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CheckLevel extends JPanel implements ActionListener {
+public class SaveMenu extends JPanel implements ActionListener {
     GUI gui;
     Font font;
     Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
@@ -19,7 +19,7 @@ public class CheckLevel extends JPanel implements ActionListener {
     JButton exitButton;
 
 
-    public CheckLevel(GUI gui) {
+    public SaveMenu(GUI gui) {
         this.gui = gui;
         JLabel label = new JLabel();
         try {
@@ -29,16 +29,18 @@ public class CheckLevel extends JPanel implements ActionListener {
         } catch (IOException e) {
             System.out.println("IOException Caught");
         }
-        label.setText("what");
+        label.setText("Saved to your Log Book!");
         label.setForeground(Color.white);
         label.setFont(font.deriveFont(15f));
-        label.setBounds(30, 30, 100, 100);
+        label.setBounds(60, 200, 200, 100);
         buttonsSetUp();
         add(label);
         add(exitButton);
         setLayout(null);
+
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setPreferredSize(new Dimension(300, 539));
+
     }
 
     public void buttonsSetUp() {
@@ -49,13 +51,13 @@ public class CheckLevel extends JPanel implements ActionListener {
         } catch (IOException e) {
             System.out.println("IOException Caught");
         }
-        exitButton = new JButton("Return");
+        exitButton = new JButton("Okay!");
         exitButton.setBackground(notGray);
         exitButton.setBorderPainted(false);
         exitButton.setForeground(lightGray);
         exitButton.setFont(font.deriveFont(15f));
         exitButton.setFocusPainted(false);
-        exitButton.setBounds(20, 490, 260, 30);
+        exitButton.setBounds(100, 280, 100, 30);
         exitButton.addActionListener(this);
     }
 
@@ -64,10 +66,10 @@ public class CheckLevel extends JPanel implements ActionListener {
         g.drawImage(img, 0, 0, this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         gui.switchBackToMain();
     }
+
 }
 

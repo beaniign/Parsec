@@ -14,11 +14,13 @@ public class GUI {
     JFrame frame;
     JPanel mainPanel;
     JPanel levelPanel;
+    JPanel savePanel;
 
     public GUI() {
         frame = new JFrame("Parsec App");
         mainPanel = new MainMenu(this);
-        levelPanel = new CheckLevel(this);
+        levelPanel = new LevelMenu(this);
+        savePanel = new SaveMenu(this);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/ui/images/Parsec Favicon.png"));
         frame.getContentPane().add(mainPanel);
@@ -52,7 +54,7 @@ public class GUI {
 
     public void switchToSavePanel() {
         frame.getContentPane().remove(mainPanel);
-        frame.getContentPane().add(levelPanel);
+        frame.getContentPane().add(savePanel);
         frame.revalidate();
     }
 

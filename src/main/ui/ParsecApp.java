@@ -420,8 +420,8 @@ public class ParsecApp {
         System.out.println("\t-------------------------------");
     }
 
-    // EFFECTS: saves the workroom to file and tells the application that the current trips are saved
-    private void saveTripLog() {
+    // EFFECTS: saves the trip log to file and tells the application that the current trips are saved
+    public void saveTripLog() {
         try {
             jsonWriter.open();
             jsonWriter.write(log);
