@@ -41,6 +41,8 @@ public class SaveMenu extends JPanel implements ActionListener {
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setPreferredSize(new Dimension(300, 539));
 
+//        gui.saveTripLog();
+
     }
 
     public void buttonsSetUp() {

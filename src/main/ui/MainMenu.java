@@ -35,6 +35,7 @@ public class MainMenu extends JPanel implements ActionListener {
         for (JButton next : buttons) {
             add(next);
         }
+
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setPreferredSize(new Dimension(300, 539));
     }

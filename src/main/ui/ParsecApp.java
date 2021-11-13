@@ -18,6 +18,7 @@ public class ParsecApp {
     private static final String SAVED_LOGS = "./data/logbook.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private boolean isSaved;
 
     private Colony mars;
     private Colony moon;
@@ -25,7 +26,7 @@ public class ParsecApp {
     private Colony saturn;
     private TripLog log;
     private Scanner input;
-    private boolean isSaved;
+
 
     // EFFECTS: runs Parsec
     public ParsecApp() {
