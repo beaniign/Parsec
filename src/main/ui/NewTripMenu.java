@@ -3,6 +3,8 @@ package ui;
 import model.TripTimer;
 
 import javax.swing.*;
+import javax.swing.Timer;
+
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -12,12 +14,16 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+
 //https://stackoverflow.com/questions/2281937/swing-jtextfield-how-to-remove-the-border
+//https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html
+//https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
+//https://stackoverflow.com/questions/10820033/make-a-simple-timer-in-java/14323134
 public class NewTripMenu extends JPanel implements ActionListener {
-    private int minutes;
     Color notGray = new Color(54, 54, 54);
     Color lightGray = new Color(150, 150, 150);
     JButton moonButton;
@@ -27,10 +33,14 @@ public class NewTripMenu extends JPanel implements ActionListener {
     JButton quitButton;
     JButton startButton;
     JTextField time;
+    JLabel currentTime;
+    long elapsedTime;
+    long startTime;
     GUI gui;
     Font font;
     Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
     List<JButton> buttons;
+    Timer timer;
 
     public NewTripMenu(GUI gui) {
         menuSetUp(gui);
@@ -103,6 +113,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
         buttons.add(jupiterButton);
         buttons.add(marsButton);
         buttons.add(moonButton);
+
         int y = 380;
         for (JButton next : buttons) {
             next.setBackground(notGray);
@@ -145,15 +156,52 @@ public class NewTripMenu extends JPanel implements ActionListener {
     }
 
     public void startTrip() {
-        minutes = Integer.parseInt(time.getText());
-        TripTimer timer = new TripTimer(minutes);
-        removeAll();
-        try {
-            timer.update();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        add(quitButton);
+        startTime = System.currentTimeMillis();
+
+        timer = new Timer(1000, this);
+        timer.addActionListener(this);
+        timer.setInitialDelay(0);
+        timer.start();
+
+
+//        long elapsedSeconds = elapsedTime / 1000;
+//        long secondsDisplay = elapsedSeconds % 60;
+//        long elapsedMinutes = elapsedSeconds / 60;
+//        int minutes = Integer.parseInt(time.getText()) * 60000;
+//        JLabel currentTime = new JLabel((time.getText()));
+//        add(currentTime);
+//        while (elapsedTime <= minutes) {
+//            time.setText(String.valueOf(secondsDisplay));
+//        }
+
+//        while (minutes >= 0) {
+//            seconds--;
+//            try {
+//                Thread.sleep(1);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            if (seconds < 10) {
+//                currentTime.setText((minutes + ":0" + seconds));
+//            } else {
+//                currentTime.setText((minutes + ":" + seconds));
+//            }
+//            if (seconds <= 0) {
+//                seconds = 60;
+//                minutes--;
+//            }
+//        }
+//        minutes = 0;
+//        seconds = 0;
+
+//        minutes = Integer.parseInt(time.getText());
+//        TripTimer timer = new TripTimer(minutes);
+//        try {
+//            timer.update();
+//        } catch (InterruptedException ex) {
+//            ex.printStackTrace();
+//        }
+
     }
 
     @Override
@@ -169,22 +217,47 @@ public class NewTripMenu extends JPanel implements ActionListener {
             gui.switchBackToMain();
         }
         if (e.getSource() == startButton) {
-            startTrip();
-        } else {
             removeAll();
-            if (e.getSource() == moonButton) {
-                tripToMoon();
-            }
-            if (e.getSource() == marsButton) {
-                tripToMars();
-            }
-            if (e.getSource() == jupiterButton) {
-                tripToJupiter();
-            }
-            if (e.getSource() == saturnButton) {
-                tripToSaturn();
+            currentTime = new JLabel(time.getText());
+            currentTime.setBounds(85, 195, 250, 100);
+            currentTime.setForeground(Color.white);
+            currentTime.setFont(font.deriveFont(60f));
+            currentTime.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+            add(currentTime);
+            startTrip();
+        }
+        if (e.getSource() == timer) {
+            int elapsedTime = (int) (System.currentTimeMillis() - startTime);
+            int timeLeft = (Integer.parseInt(time.getText()) * 60000) - elapsedTime;
+            long secondsLeft = timeLeft / 1000;
+            long secondsDisplay = secondsLeft % 60;
+            long minutesLeft = secondsLeft / 60;
+            System.out.println(timeLeft);
+            currentTime.setText((minutesLeft) + ":" + secondsDisplay);
+            if (timeLeft <= 0) {
+                timer.stop();
+                remove(currentTime);
+                add(quitButton);
             }
         }
+
+        if (e.getSource() == moonButton) {
+            removeAll();
+            tripToMoon();
+        }
+        if (e.getSource() == marsButton) {
+            removeAll();
+            tripToMars();
+        }
+        if (e.getSource() == jupiterButton) {
+            removeAll();
+            tripToJupiter();
+        }
+        if (e.getSource() == saturnButton) {
+            removeAll();
+            tripToSaturn();
+        }
+
 //        if (e.getSource() == moonButton) {
 //            removeAll();
 //            tripToMoon();
