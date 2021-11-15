@@ -27,9 +27,11 @@ public class GUI {
     private JPanel savePanel;
     private JPanel newPanel;
 
+    ParsecApp parsec;
 //    private TripLog log;
 
     public GUI() {
+//        parsec = new ParsecApp();
 //        isSaved = false;
 //        jsonWriter = new JsonWriter(SAVED_LOGS);
 //        jsonReader = new JsonReader(SAVED_LOGS);
@@ -46,6 +48,10 @@ public class GUI {
         frame.pack();
         frame.setVisible(true);
     }
+
+//    public void createNewTrip(String location, int duration) {
+//        parsec.makeNewTrip();
+//    }
 
 
     public void switchToNewPanel() {

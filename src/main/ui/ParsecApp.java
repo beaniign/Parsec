@@ -109,7 +109,6 @@ public class ParsecApp {
             int time = input.nextInt();
 
             if (checkpoint2(time, location)) {
-
                 System.out.println("Any notes you would like to add to the journey log?");
                 String note = input.next();
                 Trip myTrip = new Trip(time, location, note);
