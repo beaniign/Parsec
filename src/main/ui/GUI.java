@@ -47,10 +47,6 @@ public class GUI {
         frame.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new GUI();
-        new ParsecApp();
-    }
 
     public void switchToNewPanel() {
         frame.getContentPane().remove(mainPanel);
@@ -109,6 +105,10 @@ public class GUI {
 
     public void switchToQuitPanel() {
         System.exit(0);
+    }
+
+    public static void main(String[] args) {
+        new GUI();
     }
 }
 

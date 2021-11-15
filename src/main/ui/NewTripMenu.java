@@ -165,17 +165,33 @@ public class NewTripMenu extends JPanel implements ActionListener {
 
     public void startTrip() {
         removeAll();
-        bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Spaceship_2.gif");
-        currentTime = new JLabel(time.getText() + ": 00");
+        switch (currentTrip) {
+            case "Mars" :
+                bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Spaceship_2.gif");
+                break;
+            case "Jupiter" :
+                bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Spaceship_3.gif");
+                break;
+            case "Saturn" :
+                bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Spaceship_4.gif");
+                break;
+            default:
+                bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Spaceship_1.gif");
+                break;
+        }
+        currentTime = new JLabel(time.getText() + ":00");
         currentTime.setBounds(85, 195, 250, 100);
         currentTime.setForeground(Color.white);
         currentTime.setFont(font.deriveFont(60f));
         currentTime.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         add(currentTime);
         startTime = System.currentTimeMillis();
+        timerSetUp();
+    }
+
+    public void timerSetUp() {
         timer = new Timer(1000, this);
         timer.addActionListener(this);
-        timer.setInitialDelay(0);
         timer.start();
     }
 
