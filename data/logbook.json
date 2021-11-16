@@ -1,12 +1,22 @@
 {"trips": [
     {
-        "duration": 1,
+        "duration": 0,
         "note": "",
         "location": "Moon"
     },
     {
-        "duration": 1,
+        "duration": 0,
         "note": "",
-        "location": "Moon"
+        "location": "Mars"
+    },
+    {
+        "duration": 0,
+        "note": "",
+        "location": "Jupiter"
+    },
+    {
+        "duration": 0,
+        "note": "",
+        "location": "Saturn"
     }
 ]}

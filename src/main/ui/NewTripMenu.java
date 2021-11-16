@@ -186,8 +186,10 @@ public class NewTripMenu extends JPanel implements ActionListener {
         add(returnButton);
     }
 
+    @SuppressWarnings("methodlength")
     public void startTrip() {
         removeAll();
+        gui.createNewTrip(Integer.parseInt(duration.getText()), currentTrip, note.getText());
         switch (currentTrip) {
             case "Mars":
                 bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Spaceship_2.gif");
@@ -207,7 +209,6 @@ public class NewTripMenu extends JPanel implements ActionListener {
         currentTime.setForeground(Color.white);
         currentTime.setFont(font.deriveFont(60f));
         currentTime.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-
         add(currentTime);
         startTime = System.currentTimeMillis();
         timerSetUp();
@@ -221,18 +222,18 @@ public class NewTripMenu extends JPanel implements ActionListener {
 
     public void handleTripTime() {
 //        int minimumTime;
-        int minimumTime = 1; //<- using 1 as minimum just for testing
+        int minimumTime = 0; //<- using 0 as minimum just for testing
         int maximumTime = 99;
         int inputTime = Integer.parseInt(duration.getText());
         switch (currentTrip) {
             case "Mars":
-                minimumTime = 30;
+//                minimumTime = 30;
                 break;
             case "Jupiter":
-                minimumTime = 45;
+//                minimumTime = 45;
                 break;
             case "Saturn":
-                minimumTime = 60;
+//                minimumTime = 60;
                 break;
         }
         if (inputTime < minimumTime || inputTime > maximumTime) {
@@ -259,7 +260,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
         }
 
         if (timeLeft <= 0) {
-            gui.createNewTrip(Integer.parseInt(duration.getText()), currentTrip, note.getText());
+
             timer.stop();
             remove(currentTime);
             add(quitButton);

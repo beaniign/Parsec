@@ -9,6 +9,8 @@ import persistence.JsonWriter;
 import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
 
 // https://www.tutorialspoint.com/how-to-set-the-location-of-a-button-anywhere-in-jframe
 // https://stackoverflow.com/questions/6593322/why-does-the-jframe-setsize-method-not-set-the-size-correctly
@@ -29,6 +31,7 @@ public class GUI {
     private JPanel savePanel;
     private JPanel newPanel;
     private JPanel quitPanel;
+    private JPanel loadPanel;
 
     private Colony mars;
     private Colony moon;
@@ -36,9 +39,6 @@ public class GUI {
     private Colony saturn;
     private TripLog log;
 
-
-//    ParsecApp parsec;
-////    private TripLog log;
 
     public GUI() {
         isSaved = false;
@@ -53,13 +53,13 @@ public class GUI {
         savePanel = new SaveMenu(this);
         newPanel = new NewTripMenu(this);
         quitPanel = new QuitMenu(this);
+        loadPanel = new LoadMenu(this);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/ui/images/Parsec Favicon.png"));
         frame.getContentPane().add(mainPanel);
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
-//        parsec = new ParsecApp();
     }
 
     // MODIFIES: this
@@ -108,6 +108,55 @@ public class GUI {
         }
     }
 
+    // EFFECTS: saves the trip log to file and tells the application that the current trips are saved
+    public void saveTripLog() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(log);
+            jsonWriter.close();
+            isSaved = true;
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + SAVED_LOGS);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadTripLog() {
+        try {
+            log = jsonReader.read();
+            System.out.println("Loaded from your log book!");
+            lvlSetupFromSaved();
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + SAVED_LOGS);
+        }
+    }
+
+    private void lvlSetupFromSaved() {
+        List<Trip> trips;
+        trips = log.convertTripLogToList();
+        for (Trip next : trips) {
+            switch (next.getLocation()) {
+                case "Mars":
+                    mars.addPopulation(next.getDuration());
+                    mars.setLevel();
+                    break;
+                case "Moon":
+                    moon.addPopulation(next.getDuration());
+                    moon.setLevel();
+                    break;
+                case "Jupiter":
+                    jupiter.addPopulation(next.getDuration());
+                    jupiter.setLevel();
+                    break;
+                case "Saturn":
+                    saturn.addPopulation(next.getDuration());
+                    saturn.setLevel();
+                    break;
+            }
+        }
+    }
+
     public void switchToNewPanel() {
         frame.getContentPane().remove(mainPanel);
         frame.getContentPane().add(newPanel);
@@ -135,22 +184,12 @@ public class GUI {
     }
 
     public void switchToLoadPanel() {
+        loadTripLog();
         frame.getContentPane().remove(mainPanel);
-        frame.getContentPane().add(levelPanel);
+        frame.getContentPane().add(loadPanel);
         frame.revalidate();
     }
 
-    // EFFECTS: saves the trip log to file and tells the application that the current trips are saved
-    public void saveTripLog() {
-        try {
-            jsonWriter.open();
-            jsonWriter.write(log);
-            jsonWriter.close();
-            isSaved = true;
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + SAVED_LOGS);
-        }
-    }
 
     public void switchBackToMain() {
         frame.getContentPane().removeAll();

@@ -6,8 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SaveMenu extends JPanel implements ActionListener {
+
+public class LoadMenu extends JPanel implements ActionListener {
     GUI gui;
     Font font;
     Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
@@ -15,7 +18,8 @@ public class SaveMenu extends JPanel implements ActionListener {
     Color lightGray = new Color(150, 150, 150);
     JButton exitButton;
 
-    public SaveMenu(GUI gui) {
+
+    public LoadMenu(GUI gui) {
         this.gui = gui;
         JLabel label = new JLabel();
         try {
@@ -25,10 +29,10 @@ public class SaveMenu extends JPanel implements ActionListener {
         } catch (IOException e) {
             System.out.println("IOException Caught");
         }
-        label.setText("Saved to your Log Book!");
+        label.setText("Trip Logs Loaded!");
         label.setForeground(Color.white);
         label.setFont(font.deriveFont(20f));
-        label.setBounds(30, 200, 280, 100);
+        label.setBounds(65, 200, 200, 100);
         buttonsSetUp();
         add(label);
         add(exitButton);
