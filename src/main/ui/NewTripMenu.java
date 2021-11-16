@@ -221,7 +221,6 @@ public class NewTripMenu extends JPanel implements ActionListener {
     }
 
     public void handleTripTime() {
-//        int minimumTime;
         int minimumTime = 0; //<- using 0 as minimum just for testing
         int maximumTime = 99;
         int inputTime = Integer.parseInt(duration.getText());
@@ -305,11 +304,13 @@ public class NewTripMenu extends JPanel implements ActionListener {
         if (e.getSource() == jupiterButton) {
             removeAll();
             currentTrip = "Jupiter";
+            bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Jupiter_before.gif");
             newTrip();
         }
         if (e.getSource() == saturnButton) {
             removeAll();
             currentTrip = "Saturn";
+            bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Saturn_before.gif");
             newTrip();
         }
         if (e.getSource() == returnButton) {

@@ -1,13 +1,12 @@
 package ui;
 
+import model.Colony;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class LevelMenu extends JPanel implements ActionListener {
@@ -17,24 +16,34 @@ public class LevelMenu extends JPanel implements ActionListener {
     Color notGray = new Color(54, 54, 54);
     Color lightGray = new Color(150, 150, 150);
     JButton exitButton;
+    Colony moon;
+    Colony mars;
+    Colony jupiter;
+    Colony saturn;
+
+    JLabel moonLevel;
+    JLabel marsLevel;
+    JLabel jupiterLevel;
+    JLabel saturnLevel;
 
 
-    public LevelMenu(GUI gui) {
+    public LevelMenu(GUI gui, Colony moon, Colony mars, Colony jupiter, Colony saturn) {
+        this.moon = moon;
+        this.mars = mars;
+        this.jupiter = jupiter;
+        this.saturn = saturn;
         this.gui = gui;
-        JLabel label = new JLabel();
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
-        } catch (FontFormatException e) {
-            System.out.println("Font not accepted");
-        } catch (IOException e) {
-            System.out.println("IOException Caught");
+        } catch (Exception e) {
+            System.out.println("Exception caught");
         }
-        label.setText("what");
-        label.setForeground(Color.white);
-        label.setFont(font.deriveFont(15f));
-        label.setBounds(30, 30, 100, 100);
         buttonsSetUp();
-        add(label);
+        labelSetUp();
+        add(moonLevel);
+        add(marsLevel);
+        add(jupiterLevel);
+        add(saturnLevel);
         add(exitButton);
         setLayout(null);
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -42,13 +51,6 @@ public class LevelMenu extends JPanel implements ActionListener {
     }
 
     public void buttonsSetUp() {
-        try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
-        } catch (FontFormatException e) {
-            System.out.println("Font not accepted");
-        } catch (IOException e) {
-            System.out.println("IOException Caught");
-        }
         exitButton = new JButton("Return");
         exitButton.setBackground(notGray);
         exitButton.setBorderPainted(false);
@@ -57,6 +59,28 @@ public class LevelMenu extends JPanel implements ActionListener {
         exitButton.setFocusPainted(false);
         exitButton.setBounds(20, 490, 260, 30);
         exitButton.addActionListener(this);
+    }
+
+    public void labelSetUp() {
+
+        moonLevel = new JLabel("Moon - Level: " + moon.getLevel() + " Population: " + moon.getPopulation());
+        marsLevel = new JLabel("Mars - Level: " + mars.getLevel() + " Population: " + mars.getPopulation());
+        jupiterLevel = new JLabel("Jupiter - Level: " + jupiter.getLevel()
+                + " Population: " + jupiter.getPopulation());
+        saturnLevel = new JLabel("Saturn - Level: " + saturn.getLevel() + " Population: " + saturn.getPopulation());
+        labelStyle(moonLevel);
+        labelStyle(marsLevel);
+        labelStyle(jupiterLevel);
+        labelStyle(saturnLevel);
+        moonLevel.setBounds(30, 50, 240, 40);
+        marsLevel.setBounds(30, 100, 240, 40);
+        jupiterLevel.setBounds(30, 150, 240, 40);
+        saturnLevel.setBounds(30, 200, 240, 40);
+    }
+
+    public void labelStyle(JLabel label) {
+        label.setForeground(Color.white);
+        label.setFont(font.deriveFont(15f));
     }
 
     @Override

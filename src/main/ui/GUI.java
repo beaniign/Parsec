@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 // https://www.tutorialspoint.com/how-to-set-the-location-of-a-button-anywhere-in-jframe
@@ -27,7 +28,6 @@ public class GUI {
 
     private JFrame frame;
     private JPanel mainPanel;
-    private JPanel levelPanel;
     private JPanel savePanel;
     private JPanel newPanel;
     private JPanel quitPanel;
@@ -49,7 +49,6 @@ public class GUI {
         initializeTripLog();
         frame = new JFrame("Parsec App");
         mainPanel = new MainMenu(this);
-        levelPanel = new LevelMenu(this);
         savePanel = new SaveMenu(this);
         newPanel = new NewTripMenu(this);
         quitPanel = new QuitMenu(this);
@@ -83,8 +82,7 @@ public class GUI {
         setLocation(location, duration);
         log.addTrip(newTrip);
         isSaved = false;
-//        parsec.makeTrip(location, duration, note);
-        // how to still use the original ui class? or can I just move all the functionality in there to this gui class?
+
     }
 
     public void setLocation(String s, int i) {
@@ -165,13 +163,13 @@ public class GUI {
 
     public void switchToCheckPanel() {
         frame.getContentPane().remove(mainPanel);
-        frame.getContentPane().add(levelPanel);
+        frame.getContentPane().add(savePanel);
         frame.revalidate();
     }
 
     public void switchToLevelPanel() {
         frame.getContentPane().remove(mainPanel);
-        frame.getContentPane().add(levelPanel);
+        frame.getContentPane().add(new LevelMenu(this, moon, mars, jupiter, saturn));
         frame.revalidate();
     }
 

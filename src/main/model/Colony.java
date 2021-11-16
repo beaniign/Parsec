@@ -23,6 +23,7 @@ public class Colony {
         return level;
     }
 
+
     // MODIFIES: this
     // EFFECTS: updates the level of a colony by the fact that ever level takes an additional 100 people
     public void setLevel() {
