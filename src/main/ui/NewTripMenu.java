@@ -25,12 +25,14 @@ public class NewTripMenu extends JPanel implements ActionListener {
     JButton jupiterButton;
     JButton quitButton;
     JButton startButton;
+    JButton returnButton;
     JTextField duration;
     JTextField note;
     JLabel currentTime;
     JLabel unexpectedTime;
     JLabel unexpectedNote;
     JLabel chooseDestination;
+    JLabel noteLabel;
     String currentTrip;
     long startTime;
     GUI gui;
@@ -44,6 +46,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
     }
 
     public void menuSetUp(GUI gui) {
+        bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
         this.gui = gui;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
@@ -56,23 +59,25 @@ public class NewTripMenu extends JPanel implements ActionListener {
         add(chooseDestination);
         setLayout(null);
         buttonsSetUp();
+//        add(quitButton);
         for (JButton next : buttons) {
             add(next);
         }
+
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setPreferredSize(new Dimension(300, 539));
     }
 
     public void textFieldSetUp() {
         duration = new JTextField("15");
-        duration.setBounds(60, 100, 180, 80);
-        duration.setFont(font.deriveFont(60f));
+        duration.setBounds(60, 70, 180, 100);
+        duration.setFont(font.deriveFont(100f));
         duration.setOpaque(false);
         duration.setForeground(Color.white);
         duration.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         duration.setHorizontalAlignment(JTextField.CENTER);
         note = new JTextField("");
-        note.setBounds(60, 200, 180, 50);
+        note.setBounds(60, 190, 180, 60);
         note.setFont(font.deriveFont(25f));
         note.setBackground(notGray);
         note.setForeground(Color.white);
@@ -94,10 +99,18 @@ public class NewTripMenu extends JPanel implements ActionListener {
         startButton.setBackground(notGray);
         startButton.setBorderPainted(false);
         startButton.setForeground(lightGray);
-        startButton.setFont(font.deriveFont(15f));
+        startButton.setFont(font.deriveFont(18f));
         startButton.setFocusPainted(false);
-        startButton.setBounds(60, 300, 180, 40);
+        startButton.setBounds(60, 260, 180, 40);
         startButton.addActionListener(this);
+        returnButton = new JButton("Return");
+        returnButton.setBackground(notGray);
+        returnButton.setBorderPainted(false);
+        returnButton.setForeground(lightGray);
+        returnButton.setFont(font.deriveFont(18f));
+        returnButton.setFocusPainted(false);
+        returnButton.setBounds(60, 310, 180, 40);
+        returnButton.addActionListener(this);
         quitButton.setBackground(notGray);
         quitButton.setBorderPainted(false);
         quitButton.setForeground(lightGray);
@@ -134,36 +147,43 @@ public class NewTripMenu extends JPanel implements ActionListener {
         chooseDestination.setFont(font.deriveFont(15f));
         chooseDestination.setBounds(60, 160, 250, 100);
         unexpectedTime = new JLabel("Time not allowed!");
-        unexpectedTime.setBounds(85, 130, 250, 100);
+        unexpectedTime.setBounds(85, 20, 250, 20);
         unexpectedTime.setForeground(Color.red);
         unexpectedTime.setFont(font.deriveFont(15f));
         unexpectedTime.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         unexpectedNote = new JLabel("Note too long! (Max 8 Char)");
-        unexpectedNote.setBounds(50, 224, 250, 100);
+        unexpectedNote.setBounds(50, 40, 250, 20);
         unexpectedNote.setForeground(Color.red);
         unexpectedNote.setFont(font.deriveFont(15f));
         unexpectedNote.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        noteLabel = new JLabel("Enter Trip Notes Below:");
+        noteLabel.setBounds(65, 125, 250, 100);
+        noteLabel.setForeground(lightGray);
+        noteLabel.setFont(font.deriveFont(15f));
+        noteLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder());
     }
 
     public void newTrip() {
         textFieldSetUp();
         switch (currentTrip) {
-            case "Moon" :
+            case "Moon":
                 duration.setText("15");
                 break;
-            case "Mars" :
+            case "Mars":
                 duration.setText("30");
                 break;
-            case "Jupiter" :
+            case "Jupiter":
                 duration.setText("45");
                 break;
-            case "Saturn" :
+            case "Saturn":
                 duration.setText("60");
                 break;
         }
         add(duration);
         add(note);
+        add(noteLabel);
         add(startButton);
+        add(returnButton);
     }
 
     public void startTrip() {
@@ -200,7 +220,8 @@ public class NewTripMenu extends JPanel implements ActionListener {
     }
 
     public void handleTripTime() {
-        int minimumTime = 15;
+//        int minimumTime;
+        int minimumTime = 1; //<- using 1 as minimum just for testing
         int maximumTime = 99;
         int inputTime = Integer.parseInt(duration.getText());
         switch (currentTrip) {
@@ -219,7 +240,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
         }
         if ((int) note.getText().chars().count() > 8) {
             add(unexpectedNote);
-        } else {
+        } else if (inputTime >= minimumTime && inputTime <= maximumTime) {
             startTrip();
         }
     }
@@ -238,7 +259,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
         }
 
         if (timeLeft <= 0) {
-//            gui.createNewTrip(currentTrip, Integer.parseInt(time.getText()));
+            gui.createNewTrip(Integer.parseInt(duration.getText()), currentTrip, note.getText());
             timer.stop();
             remove(currentTime);
             add(quitButton);
@@ -260,6 +281,8 @@ public class NewTripMenu extends JPanel implements ActionListener {
             gui.switchBackToMain();
         }
         if (e.getSource() == startButton) {
+            remove(unexpectedNote);
+            remove(unexpectedTime);
             handleTripTime();
         }
 
@@ -269,11 +292,13 @@ public class NewTripMenu extends JPanel implements ActionListener {
         if (e.getSource() == moonButton) {
             removeAll();
             currentTrip = "Moon";
+            bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Moon_before.gif");
             newTrip();
         }
         if (e.getSource() == marsButton) {
             removeAll();
             currentTrip = "Mars";
+            bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Mars_before.gif");
             newTrip();
         }
         if (e.getSource() == jupiterButton) {
@@ -285,6 +310,10 @@ public class NewTripMenu extends JPanel implements ActionListener {
             removeAll();
             currentTrip = "Saturn";
             newTrip();
+        }
+        if (e.getSource() == returnButton) {
+            removeAll();
+            menuSetUp(gui);
         }
     }
 

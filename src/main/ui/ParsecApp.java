@@ -98,6 +98,14 @@ public class ParsecApp {
         }
     }
 
+    public void makeTrip(String location, int duration, String note) {
+        Trip newTrip = new Trip(duration, location, note);
+        setLocation(location, duration);
+        TripLog tlog = new TripLog();
+        tlog.addTrip(newTrip);
+        isSaved = false;
+    }
+
     // MODIFIES: this
     // EFFECTS: creates a new trip along with its timer
     public void makeNewTrip() {

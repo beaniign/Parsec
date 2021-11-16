@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu extends JPanel implements ActionListener {
-    Color notBlack = new Color(39, 39, 39);
     Color notGray = new Color(54, 54, 54);
     Color lightGray = new Color(150, 150, 150);
     JButton newButton;
@@ -50,8 +49,8 @@ public class MainMenu extends JPanel implements ActionListener {
             System.out.println("IOException Caught");
         }
         newButton = new JButton("New Trip");
-        checkButton = new JButton("Check Trip Logs");
-        levelButton = new JButton("Check Colony Levels");
+        checkButton = new JButton("Trip Logs");
+        levelButton = new JButton("Colony Levels");
         saveButton = new JButton("Save Changes");
         loadButton = new JButton("Load Trips");
         exitButton = new JButton("Quit");
