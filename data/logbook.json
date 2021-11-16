@@ -1,12 +1,1 @@
-{"trips": [
-    {
-        "duration": 1,
-        "note": "",
-        "location": "Moon"
-    },
-    {
-        "duration": 1,
-        "note": "",
-        "location": "Mars"
-    }
-]}
+{"trips": []}

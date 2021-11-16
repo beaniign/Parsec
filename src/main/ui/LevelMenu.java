@@ -62,22 +62,40 @@ public class LevelMenu extends JPanel implements ActionListener {
     }
 
     public void labelSetUp() {
-
-        moonLevel = new JLabel("Moon - Level: " + moon.getLevel() + " Population: " + moon.getPopulation());
-        marsLevel = new JLabel("Mars - Level: " + mars.getLevel() + " Population: " + mars.getPopulation());
-        jupiterLevel = new JLabel("Jupiter - Level: " + jupiter.getLevel()
-                + " Population: " + jupiter.getPopulation());
-        saturnLevel = new JLabel("Saturn - Level: " + saturn.getLevel() + " Population: " + saturn.getPopulation());
+        JLabel moonTitle = new JLabel("MOON");
+        labelTitleStyle(moonTitle);
+        moonTitle.setBounds(30, 30, 240, 60);
+        add(moonTitle);
+        JLabel marsTitle = new JLabel("MARS");
+        labelTitleStyle(marsTitle);
+        marsTitle.setBounds(30, 120, 240, 60);
+        add(marsTitle);
+        JLabel jupiterTitle = new JLabel("JUPITER");
+        labelTitleStyle(jupiterTitle);
+        jupiterTitle.setBounds(30, 210, 240, 60);
+        add(jupiterTitle);
+        JLabel saturnTitle = new JLabel("SATURN");
+        labelTitleStyle(saturnTitle);
+        saturnTitle.setBounds(30, 300, 240, 60);
+        add(saturnTitle);
+        moonLevel = new JLabel("Level: " + moon.getLevel() + "  Population: " + moon.getPopulation());
+        marsLevel = new JLabel("Level: " + mars.getLevel() + "  Population: " + mars.getPopulation());
+        jupiterLevel = new JLabel("Level: " + jupiter.getLevel() + "  Population: " + jupiter.getPopulation());
+        saturnLevel = new JLabel("Level: " + saturn.getLevel() + "  Population: " + saturn.getPopulation());
         labelStyle(moonLevel);
         labelStyle(marsLevel);
         labelStyle(jupiterLevel);
         labelStyle(saturnLevel);
-        moonLevel.setBounds(30, 50, 240, 40);
-        marsLevel.setBounds(30, 100, 240, 40);
-        jupiterLevel.setBounds(30, 150, 240, 40);
-        saturnLevel.setBounds(30, 200, 240, 40);
+        moonLevel.setBounds(30, 80, 240, 20);
+        marsLevel.setBounds(30, 170, 240, 20);
+        jupiterLevel.setBounds(30, 260, 240, 20);
+        saturnLevel.setBounds(30, 350, 240, 20);
     }
 
+    public void labelTitleStyle(JLabel label) {
+        label.setForeground(Color.white);
+        label.setFont(font.deriveFont(60f));
+    }
     public void labelStyle(JLabel label) {
         label.setForeground(Color.white);
         label.setFont(font.deriveFont(15f));
