@@ -17,7 +17,7 @@ import java.util.List;
 //https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
 //https://stackoverflow.com/questions/10820033/make-a-simple-timer-in-java/14323134
 public class NewTripMenu extends JPanel implements ActionListener {
-    Color notGray = new Color(54, 54, 54);
+    Color darkGray = new Color(54, 54, 54);
     Color lightGray = new Color(150, 150, 150);
     JButton moonButton;
     JButton marsButton;
@@ -79,7 +79,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
         note = new JTextField("");
         note.setBounds(60, 190, 180, 60);
         note.setFont(font.deriveFont(25f));
-        note.setBackground(notGray);
+        note.setBackground(darkGray);
         note.setForeground(Color.white);
         note.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         note.setHorizontalAlignment(JTextField.CENTER);
@@ -96,7 +96,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
         }
         quitButton = new JButton("Return");
         startButton = new JButton("Begin Journey");
-        startButton.setBackground(notGray);
+        startButton.setBackground(darkGray);
         startButton.setBorderPainted(false);
         startButton.setForeground(lightGray);
         startButton.setFont(font.deriveFont(18f));
@@ -104,14 +104,14 @@ public class NewTripMenu extends JPanel implements ActionListener {
         startButton.setBounds(60, 260, 180, 40);
         startButton.addActionListener(this);
         returnButton = new JButton("Return");
-        returnButton.setBackground(notGray);
+        returnButton.setBackground(darkGray);
         returnButton.setBorderPainted(false);
         returnButton.setForeground(lightGray);
         returnButton.setFont(font.deriveFont(18f));
         returnButton.setFocusPainted(false);
         returnButton.setBounds(60, 310, 180, 40);
         returnButton.addActionListener(this);
-        quitButton.setBackground(notGray);
+        quitButton.setBackground(darkGray);
         quitButton.setBorderPainted(false);
         quitButton.setForeground(lightGray);
         quitButton.setFont(font.deriveFont(15f));
@@ -130,7 +130,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
 
         int y = 380;
         for (JButton next : buttons) {
-            next.setBackground(notGray);
+            next.setBackground(darkGray);
             next.setBorderPainted(false);
             next.setForeground(lightGray);
             next.setFont(font.deriveFont(15f));

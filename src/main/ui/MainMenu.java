@@ -10,18 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu extends JPanel implements ActionListener {
-    Color notGray = new Color(54, 54, 54);
-    Color lightGray = new Color(150, 150, 150);
-    JButton newButton;
-    JButton checkButton;
-    JButton saveButton;
-    JButton loadButton;
-    JButton levelButton;
-    JButton exitButton;
-    GUI gui;
-    Font font;
-    Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
-    List<JButton> buttons;
+    private Color darkGray = new Color(54, 54, 54);
+    private Color lightGray = new Color(150, 150, 150);
+    private JButton newButton;
+    private JButton checkButton;
+    private JButton saveButton;
+    private JButton loadButton;
+    private JButton levelButton;
+    private JButton exitButton;
+    private GUI gui;
+    private Font font;
+    private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+    private List<JButton> buttons;
 
     public MainMenu(GUI gui) {
         this.gui = gui;
@@ -63,7 +63,7 @@ public class MainMenu extends JPanel implements ActionListener {
         buttons.add(newButton);
         int y = 490;
         for (JButton next : buttons) {
-            next.setBackground(notGray);
+            next.setBackground(darkGray);
             next.setBorderPainted(false);
             next.setForeground(lightGray);
             next.setFont(font.deriveFont(15f));

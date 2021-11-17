@@ -8,12 +8,12 @@ import java.io.File;
 import java.io.IOException;
 
 public class LogMenu extends JPanel implements ActionListener {
-    GUI gui;
-    Font font;
-    Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
-    Color notGray = new Color(54, 54, 54);
-    Color lightGray = new Color(150, 150, 150);
-    JButton exitButton;
+    private GUI gui;
+    private Font font;
+    private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+    private Color darkGray = new Color(54, 54, 54);
+    private Color lightGray = new Color(150, 150, 150);
+    private JButton exitButton;
 
     public LogMenu(GUI gui) {
         this.gui = gui;
@@ -46,7 +46,7 @@ public class LogMenu extends JPanel implements ActionListener {
             System.out.println("IOException Caught");
         }
         exitButton = new JButton("Okay!");
-        exitButton.setBackground(notGray);
+        exitButton.setBackground(darkGray);
         exitButton.setBorderPainted(false);
         exitButton.setForeground(lightGray);
         exitButton.setFont(font.deriveFont(15f));
