@@ -86,7 +86,7 @@ public class MainMenu extends JPanel implements ActionListener {
             gui.switchToNewPanel();
         }
         if (e.getSource() == checkButton) {
-            gui.switchToCheckPanel();
+            gui.switchToLogPanel();
         }
         if (e.getSource() == levelButton) {
             gui.switchToLevelPanel();

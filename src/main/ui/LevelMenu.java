@@ -7,31 +7,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
+import java.util.ArrayList;
 
 
 public class LevelMenu extends JPanel implements ActionListener {
-    GUI gui;
-    Font font;
-    Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
-    Color notGray = new Color(54, 54, 54);
-    Color lightGray = new Color(150, 150, 150);
-    JButton exitButton;
-    Colony moon;
-    Colony mars;
-    Colony jupiter;
-    Colony saturn;
-
-    JLabel moonLevel;
-    JLabel marsLevel;
-    JLabel jupiterLevel;
-    JLabel saturnLevel;
-
+    private GUI gui;
+    private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+    private Color notGray = new Color(54, 54, 54);
+    private Color lightGray = new Color(150, 150, 150);
+    private JButton exitButton;
+    private Font font;
 
     public LevelMenu(GUI gui, Colony moon, Colony mars, Colony jupiter, Colony saturn) {
-        this.moon = moon;
-        this.mars = mars;
-        this.jupiter = jupiter;
-        this.saturn = saturn;
         this.gui = gui;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
@@ -39,11 +27,7 @@ public class LevelMenu extends JPanel implements ActionListener {
             System.out.println("Exception caught");
         }
         buttonsSetUp();
-        labelSetUp();
-        add(moonLevel);
-        add(marsLevel);
-        add(jupiterLevel);
-        add(saturnLevel);
+        labelSetUp(moon, mars, jupiter, saturn);
         add(exitButton);
         setLayout(null);
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -61,51 +45,55 @@ public class LevelMenu extends JPanel implements ActionListener {
         exitButton.addActionListener(this);
     }
 
-    public void labelSetUp() {
+    public void labelSetUp(Colony moon, Colony mars, Colony jupiter, Colony saturn) {
         JLabel moonTitle = new JLabel("MOON");
-        labelTitleStyle(moonTitle);
-        moonTitle.setBounds(30, 30, 240, 60);
-        add(moonTitle);
         JLabel marsTitle = new JLabel("MARS");
-        labelTitleStyle(marsTitle);
-        marsTitle.setBounds(30, 120, 240, 60);
-        add(marsTitle);
         JLabel jupiterTitle = new JLabel("JUPITER");
-        labelTitleStyle(jupiterTitle);
-        jupiterTitle.setBounds(30, 210, 240, 60);
-        add(jupiterTitle);
         JLabel saturnTitle = new JLabel("SATURN");
-        labelTitleStyle(saturnTitle);
-        saturnTitle.setBounds(30, 300, 240, 60);
-        add(saturnTitle);
-        moonLevel = new JLabel("Level: " + moon.getLevel() + "  Population: " + moon.getPopulation());
-        marsLevel = new JLabel("Level: " + mars.getLevel() + "  Population: " + mars.getPopulation());
-        jupiterLevel = new JLabel("Level: " + jupiter.getLevel() + "  Population: " + jupiter.getPopulation());
-        saturnLevel = new JLabel("Level: " + saturn.getLevel() + "  Population: " + saturn.getPopulation());
-        labelStyle(moonLevel);
-        labelStyle(marsLevel);
-        labelStyle(jupiterLevel);
-        labelStyle(saturnLevel);
-        moonLevel.setBounds(30, 80, 240, 20);
-        marsLevel.setBounds(30, 170, 240, 20);
-        jupiterLevel.setBounds(30, 260, 240, 20);
-        saturnLevel.setBounds(30, 350, 240, 20);
+        List<JLabel> titles = new ArrayList<>();
+        titles.add(moonTitle);
+        titles.add(marsTitle);
+        titles.add(jupiterTitle);
+        titles.add(saturnTitle);
+        titlesSetUp(titles);
+        JLabel moonLevel = new JLabel("Level: " + moon.getLevel() + "  Population: " + moon.getPopulation());
+        JLabel marsLevel = new JLabel("Level: " + mars.getLevel() + "  Population: " + mars.getPopulation());
+        JLabel jupiterLevel = new JLabel("Level: " + jupiter.getLevel() + "  Population: " + jupiter.getPopulation());
+        JLabel saturnLevel = new JLabel("Level: " + saturn.getLevel() + "  Population: " + saturn.getPopulation());
+        List<JLabel> labels = new ArrayList<>();
+        labels.add(moonLevel);
+        labels.add(marsLevel);
+        labels.add(jupiterLevel);
+        labels.add(saturnLevel);
+        labelsSetUp(labels);
     }
 
-    public void labelTitleStyle(JLabel label) {
-        label.setForeground(Color.white);
-        label.setFont(font.deriveFont(60f));
+    public void titlesSetUp(List<JLabel> titles) {
+        int y = 70;
+        for (JLabel next : titles) {
+            next.setForeground(Color.white);
+            next.setFont(font.deriveFont(60f));
+            next.setBounds(30, y, 240, 60);
+            add(next);
+            y += 90;
+        }
     }
-    public void labelStyle(JLabel label) {
-        label.setForeground(Color.white);
-        label.setFont(font.deriveFont(15f));
+
+    public void labelsSetUp(List<JLabel> labels) {
+        int y = 120;
+        for (JLabel next : labels) {
+            next.setForeground(Color.white);
+            next.setFont(font.deriveFont(15f));
+            next.setBounds(30, y, 240, 20);
+            add(next);
+            y += 90;
+        }
     }
 
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(img, 0, 0, this);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -32,6 +32,7 @@ public class GUI {
     private JPanel newPanel;
     private JPanel quitPanel;
     private JPanel loadPanel;
+    private JPanel logPanel;
 
     private Colony mars;
     private Colony moon;
@@ -41,24 +42,37 @@ public class GUI {
 
 
     public GUI() {
-        isSaved = false;
-        jsonWriter = new JsonWriter(SAVED_LOGS);
-        jsonReader = new JsonReader(SAVED_LOGS);
+        initializeJson();
         initializeTripLog();
         initializeColonies();
         initializeTripLog();
-        frame = new JFrame("Parsec App");
-        mainPanel = new MainMenu(this);
-        savePanel = new SaveMenu(this);
-        newPanel = new NewTripMenu(this);
-        quitPanel = new QuitMenu(this);
-        loadPanel = new LoadMenu(this);
+        initializePanels();
+        initializeFrame();
+    }
+
+    public void initializeJson() {
+        isSaved = true;
+        jsonWriter = new JsonWriter(SAVED_LOGS);
+        jsonReader = new JsonReader(SAVED_LOGS);
+    }
+
+    public void initializeFrame() {
+        frame = new JFrame("Parsec");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/ui/images/Parsec Favicon.png"));
         frame.getContentPane().add(mainPanel);
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public void initializePanels() {
+        mainPanel = new MainMenu(this);
+        savePanel = new SaveMenu(this);
+        newPanel = new NewTripMenu(this);
+        quitPanel = new QuitMenu(this);
+        loadPanel = new LoadMenu(this);
+        logPanel = new LogMenu(this);
     }
 
     // MODIFIES: this
@@ -82,7 +96,6 @@ public class GUI {
         setLocation(location, duration);
         log.addTrip(newTrip);
         isSaved = false;
-
     }
 
     public void setLocation(String s, int i) {
@@ -161,9 +174,9 @@ public class GUI {
         frame.revalidate();
     }
 
-    public void switchToCheckPanel() {
+    public void switchToLogPanel() {
         frame.getContentPane().remove(mainPanel);
-        frame.getContentPane().add(savePanel);
+        frame.getContentPane().add(logPanel);
         frame.revalidate();
     }
 
