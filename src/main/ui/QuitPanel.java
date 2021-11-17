@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class QuitMenu extends JPanel implements ActionListener {
+public class QuitPanel extends JPanel implements ActionListener {
     private GUI gui;
     private Font font;
     private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
@@ -21,7 +21,7 @@ public class QuitMenu extends JPanel implements ActionListener {
     private JButton noButton;
 
 
-    public QuitMenu(GUI gui) {
+    public QuitPanel(GUI gui) {
         this.gui = gui;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));

@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 // https://www.tutorialspoint.com/how-to-set-the-location-of-a-button-anywhere-in-jframe
@@ -67,12 +66,12 @@ public class GUI {
     }
 
     public void initializePanels() {
-        mainPanel = new MainMenu(this);
-        savePanel = new SaveMenu(this);
-        newPanel = new NewTripMenu(this);
-        quitPanel = new QuitMenu(this);
-        loadPanel = new LoadMenu(this);
-        logPanel = new LogMenu(this);
+        mainPanel = new MainPanel(this);
+        savePanel = new SavePanel(this);
+        newPanel = new NewTripPanel(this);
+        quitPanel = new QuitPanel(this);
+        loadPanel = new LoadPanel(this);
+        logPanel = new LogPanel(this, log);
     }
 
     // MODIFIES: this
@@ -95,6 +94,10 @@ public class GUI {
         Trip newTrip = new Trip(duration, location, note);
         setLocation(location, duration);
         log.addTrip(newTrip);
+        isSaved = false;
+    }
+
+    public void setIsSaved() {
         isSaved = false;
     }
 
@@ -176,7 +179,7 @@ public class GUI {
 
     public void switchToLogPanel() {
         frame.getContentPane().remove(mainPanel);
-        frame.getContentPane().add(logPanel);
+        frame.getContentPane().add(new LogPanel(this, log));
         frame.revalidate();
     }
 

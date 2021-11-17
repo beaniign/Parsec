@@ -16,7 +16,7 @@ import java.util.List;
 //https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html
 //https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
 //https://stackoverflow.com/questions/10820033/make-a-simple-timer-in-java/14323134
-public class NewTripMenu extends JPanel implements ActionListener {
+public class NewTripPanel extends JPanel implements ActionListener {
     Color darkGray = new Color(54, 54, 54);
     Color lightGray = new Color(150, 150, 150);
     JButton moonButton;
@@ -41,7 +41,7 @@ public class NewTripMenu extends JPanel implements ActionListener {
     List<JButton> buttons;
     Timer timer;
 
-    public NewTripMenu(GUI gui) {
+    public NewTripPanel(GUI gui) {
         menuSetUp(gui);
     }
 

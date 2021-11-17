@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-public class LogMenu extends JPanel implements ActionListener {
+
+public class LoadPanel extends JPanel implements ActionListener {
     private GUI gui;
     private Font font;
     private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
@@ -15,7 +16,8 @@ public class LogMenu extends JPanel implements ActionListener {
     private Color lightGray = new Color(150, 150, 150);
     private JButton exitButton;
 
-    public LogMenu(GUI gui) {
+
+    public LoadPanel(GUI gui) {
         this.gui = gui;
         JLabel label = new JLabel();
         try {
@@ -25,10 +27,10 @@ public class LogMenu extends JPanel implements ActionListener {
         } catch (IOException e) {
             System.out.println("IOException Caught");
         }
-        label.setText("Saved to your Log Book!");
+        label.setText("Trip Logs Loaded!");
         label.setForeground(Color.white);
         label.setFont(font.deriveFont(20f));
-        label.setBounds(30, 200, 280, 100);
+        label.setBounds(65, 200, 200, 100);
         buttonsSetUp();
         add(label);
         add(exitButton);

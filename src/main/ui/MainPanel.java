@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu extends JPanel implements ActionListener {
+public class MainPanel extends JPanel implements ActionListener {
     private Color darkGray = new Color(54, 54, 54);
     private Color lightGray = new Color(150, 150, 150);
     private JButton newButton;
@@ -23,7 +23,7 @@ public class MainMenu extends JPanel implements ActionListener {
     private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
     private List<JButton> buttons;
 
-    public MainMenu(GUI gui) {
+    public MainPanel(GUI gui) {
         this.gui = gui;
         Icon logo = new ImageIcon("src/main/ui/images/Parsec Logo.png");
         JLabel label = new JLabel(logo);

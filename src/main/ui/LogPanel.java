@@ -1,13 +1,18 @@
 package ui;
 
+import model.Trip;
+import model.TripLog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
-public class SaveMenu extends JPanel implements ActionListener {
+
+public class LogPanel extends JPanel implements ActionListener {
     private GUI gui;
     private Font font;
     private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
@@ -15,9 +20,9 @@ public class SaveMenu extends JPanel implements ActionListener {
     private Color lightGray = new Color(150, 150, 150);
     private JButton exitButton;
 
-    public SaveMenu(GUI gui) {
+    public LogPanel(GUI gui, TripLog tripLog) {
         this.gui = gui;
-        JLabel label = new JLabel();
+
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
         } catch (FontFormatException e) {
@@ -25,12 +30,25 @@ public class SaveMenu extends JPanel implements ActionListener {
         } catch (IOException e) {
             System.out.println("IOException Caught");
         }
-        label.setText("Saved to your Log Book!");
-        label.setForeground(Color.white);
-        label.setFont(font.deriveFont(20f));
-        label.setBounds(30, 200, 280, 100);
+        List<Trip> trips = tripLog.convertTripLogToList();
+        int y = 40;
+        for (Trip next : trips) {
+            int i = trips.indexOf(next) + 1;
+            JLabel label =
+                    new JLabel("Trip #" + i + " - " + next.getLocation().toUpperCase()
+                            + " - " + next.getDuration() + "mins - Note: " + next.getNote());
+            label.setForeground(Color.white);
+            label.setFont(font.deriveFont(12f));
+            label.setBounds(20, y, 280, 15);
+            add(label);
+            y += 25;
+        }
+//        JLabel label = new JLabel();
+//        label.setText("Saved to your Log Book!");
+//        label.setForeground(Color.white);
+//        label.setFont(font.deriveFont(20f));
+//        label.setBounds(30, 200, 280, 100);
         buttonsSetUp();
-        add(label);
         add(exitButton);
         setLayout(null);
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
