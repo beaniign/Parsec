@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MainPanel extends JPanel implements ActionListener {
     private Color darkGray = new Color(54, 54, 54);
-    private Color lightGray = new Color(150, 150, 150);
+    private Color lightGray = new Color(200, 200, 200);
     private JButton newButton;
     private JButton checkButton;
     private JButton saveButton;
@@ -20,15 +20,15 @@ public class MainPanel extends JPanel implements ActionListener {
     private JButton exitButton;
     private GUI gui;
     private Font font;
-    private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+    private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Main_Background.gif");
     private List<JButton> buttons;
 
     public MainPanel(GUI gui) {
         this.gui = gui;
         Icon logo = new ImageIcon("src/main/ui/images/Parsec Logo.png");
-        JLabel label = new JLabel(logo);
-        label.setBounds(80, 110, 142, 29);
-        add(label);
+//        JLabel label = new JLabel(logo);
+//        label.setBounds(80, 110, 142, 29);
+//        add(label);
         setLayout(null);
         buttonsSetUp();
         for (JButton next : buttons) {
@@ -61,16 +61,16 @@ public class MainPanel extends JPanel implements ActionListener {
         buttons.add(levelButton);
         buttons.add(checkButton);
         buttons.add(newButton);
-        int y = 490;
+        int y = 485;
         for (JButton next : buttons) {
             next.setBackground(darkGray);
             next.setBorderPainted(false);
             next.setForeground(lightGray);
-            next.setFont(font.deriveFont(15f));
+            next.setFont(font.deriveFont(18f));
             next.setFocusPainted(false);
-            next.setBounds(20, y, 260, 30);
+            next.setBounds(20, y, 260, 35);
             next.addActionListener(this);
-            y -= 40;
+            y -= 45;
         }
     }
 

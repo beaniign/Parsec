@@ -3,6 +3,8 @@ package ui;
 import model.Colony;
 import model.Trip;
 import model.TripLog;
+import model.exception.EmptyLogException;
+import model.exception.TripDoesNotExistException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -169,6 +171,57 @@ public class GUI {
                     break;
             }
         }
+    }
+
+    public void deleteTripLog(int i) throws TripDoesNotExistException {
+        int index = i - 1;
+        if (index < 0) {
+            System.out.println("The index cannot be negative or zero!");
+        } else {
+            removePopulation(log.getTrip(index));
+            log.deleteLogElement(index);
+            System.out.println("Your log entry has been deleted!");
+            isSaved = false;
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes population from a colony and set their levels according to the new population
+    public void removePopulation(Trip deletedTrip) {
+        switch (deletedTrip.getLocation()) {
+            case "Mars":
+                mars.removePopulation(deletedTrip.getDuration());
+                mars.setLevel();
+                break;
+            case "Moon":
+                moon.removePopulation(deletedTrip.getDuration());
+                moon.setLevel();
+                break;
+            case "Jupiter":
+                jupiter.removePopulation(deletedTrip.getDuration());
+                jupiter.setLevel();
+                break;
+            case "Saturn":
+                saturn.removePopulation(deletedTrip.getDuration());
+                saturn.setLevel();
+                break;
+        }
+
+    }
+
+    public void clearTripLog() {
+        log.clearTripLog();
+        mars.resetPopulation();
+        moon.resetPopulation();
+        jupiter.resetPopulation();
+        saturn.resetPopulation();
+        mars.setLevel();
+        moon.setLevel();
+        jupiter.setLevel();
+        saturn.setLevel();
+        System.out.println("Your log has been cleared!");
+        isSaved = false;
     }
 
     public void switchToNewPanel() {

@@ -56,10 +56,8 @@ public class TripLog implements Writable {
     // EFFECTS: removes an element inside a trip log based on the integer given, that will be the index of the trip
     //          that will be removed, also throws exceptions when the trip log is empty, or when the index given is
     //          invalid
-    public void deleteLogElement(int i) throws EmptyLogException, TripDoesNotExistException {
-        if (trips.isEmpty()) {
-            throw new EmptyLogException();
-        } else if ((i + 1) > trips.size()) {
+    public void deleteLogElement(int i) throws TripDoesNotExistException {
+        if ((i + 1) > trips.size()) {
             throw new TripDoesNotExistException();
         } else {
             trips.remove(i);

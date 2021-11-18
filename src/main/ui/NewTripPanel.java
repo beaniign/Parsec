@@ -18,7 +18,7 @@ import java.util.List;
 //https://stackoverflow.com/questions/10820033/make-a-simple-timer-in-java/14323134
 public class NewTripPanel extends JPanel implements ActionListener {
     Color darkGray = new Color(54, 54, 54);
-    Color lightGray = new Color(150, 150, 150);
+    private Color lightGray = new Color(200, 200, 200);
     JButton moonButton;
     JButton marsButton;
     JButton saturnButton;
@@ -59,11 +59,6 @@ public class NewTripPanel extends JPanel implements ActionListener {
         add(chooseDestination);
         setLayout(null);
         buttonsSetUp();
-//        add(quitButton);
-        for (JButton next : buttons) {
-            add(next);
-        }
-
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setPreferredSize(new Dimension(300, 539));
     }
@@ -118,7 +113,7 @@ public class NewTripPanel extends JPanel implements ActionListener {
         quitButton.setFocusPainted(false);
         quitButton.setBounds(20, 490, 260, 40);
         quitButton.addActionListener(this);
-        moonButton = new JButton("The Moon - Requires 15 mins");
+        moonButton = new JButton("Moon - Requires 15 mins");
         marsButton = new JButton("Mars - Requires 30 mins");
         jupiterButton = new JButton("Jupiter - Requires 45 mins");
         saturnButton = new JButton("Saturn - Requires 60 mins");
@@ -133,10 +128,11 @@ public class NewTripPanel extends JPanel implements ActionListener {
             next.setBackground(darkGray);
             next.setBorderPainted(false);
             next.setForeground(lightGray);
-            next.setFont(font.deriveFont(15f));
+            next.setFont(font.deriveFont(17f));
             next.setFocusPainted(false);
             next.setBounds(20, y, 260, 40);
             next.addActionListener(this);
+            add(next);
             y -= 50;
         }
     }
@@ -205,7 +201,8 @@ public class NewTripPanel extends JPanel implements ActionListener {
                 break;
         }
         currentTime = new JLabel(duration.getText() + ":00");
-        currentTime.setBounds(85, 195, 250, 100);
+        currentTime.setBounds(25, 195, 250, 100);
+        currentTime.setHorizontalAlignment(SwingConstants.CENTER);
         currentTime.setForeground(Color.white);
         currentTime.setFont(font.deriveFont(60f));
         currentTime.setBorder(javax.swing.BorderFactory.createEmptyBorder());
@@ -254,10 +251,11 @@ public class NewTripPanel extends JPanel implements ActionListener {
 //            System.out.println(timeLeft);  <- not needed for GUI, just sout'ing to check
         if (secondsDisplay <= 9) {
             currentTime.setText(minutesLeft + ":0" + (timeLeft / 1000) % 60);
+
         } else {
             currentTime.setText(minutesLeft + ":" + (timeLeft / 1000) % 60);
         }
-
+        currentTime.setHorizontalAlignment(SwingConstants.CENTER);
         if (timeLeft <= 0) {
 
             timer.stop();

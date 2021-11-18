@@ -324,8 +324,6 @@ public class ParsecApp {
                 log.deleteLogElement(index);
                 System.out.println("Your log entry has been deleted!");
                 isSaved = false;
-            } catch (EmptyLogException e) {
-                System.out.println("Your logs are empty!");
             } catch (TripDoesNotExistException e) {
                 System.out.println("That log entry does not exist!");
             }

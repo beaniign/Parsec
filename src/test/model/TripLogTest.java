@@ -74,8 +74,8 @@ public class TripLogTest {
         try {
             testTripLog.deleteLogElement(1);
             assertEquals(1, testTripLog.length());
-        } catch (EmptyLogException | TripDoesNotExistException e) {
-            e.printStackTrace();
+        } catch (TripDoesNotExistException e) {
+            fail("Exception should not have been thrown!");
         }
 
     }
@@ -88,8 +88,6 @@ public class TripLogTest {
             assertEquals(0, testTripLog.length());
             testTripLog.deleteLogElement(1);
             fail("Exception not thrown");
-        } catch (EmptyLogException e){
-            fail("Incorrect Exception");
         } catch (TripDoesNotExistException e) {
             // expected
         }
@@ -101,26 +99,11 @@ public class TripLogTest {
         try {
             testTripLog.deleteLogElement(3);
             fail("Exception not thrown");
-        } catch (EmptyLogException e) {
-            fail("Incorrect Exception");
         } catch (TripDoesNotExistException e) {
             // expected
         }
     }
 
-
-    @Test
-    void testDeleteLogElementsEmpty() {
-        assertEquals(0, testTripLog.length());
-        try {
-            testTripLog.deleteLogElement(1);
-            fail("Exception not thrown");
-        } catch (EmptyLogException e){
-            // expected
-        } catch (TripDoesNotExistException e) {
-            fail("Incorrect Exception");
-        }
-    }
 
     @Test
     void testGetTrip() {

@@ -15,7 +15,7 @@ public class LevelMenu extends JPanel implements ActionListener {
     private GUI gui;
     private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
     private Color notGray = new Color(54, 54, 54);
-    private Color lightGray = new Color(150, 150, 150);
+    private Color lightGray = new Color(200, 200, 200);
     private JButton exitButton;
     private Font font;
 
