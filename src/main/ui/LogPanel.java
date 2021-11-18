@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,8 +57,36 @@ public class LogPanel extends JPanel implements ActionListener {
             label.setBounds(10, 240, 280, 50);
             label.setHorizontalAlignment(SwingConstants.CENTER);
             add(label);
+
+//        }
+//        else if (trips.size() > 15) {
+//            List<Trip> limitedTrips = new ArrayList<>();
+//            int remaining = (trips.size() - 15);
+//            while (remaining > 0) {
+//                limitedTrips.add(trips.get(trips.size() - 1));
+//                remaining -= 1;
+//            }
+//
+//            int y = 40;
+//            for (Trip next : limitedTrips) {
+//                JLabel label =
+//                        new JLabel("Trip #" + (trips.indexOf(next) + 1) + " - " + next.getLocation().toUpperCase()
+//                                + " - " + next.getDuration() + "mins - Note: " + next.getNote());
+//                label.setForeground(Color.white);
+//                label.setFont(font.deriveFont(12f));
+//                label.setBounds(20, y, 280, 15);
+//                add(label);
+//                y += 25;
+//            }
         } else {
-            int y = 40;
+//            JScrollPane scrollPane = new JScrollPane();
+//            scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+//            scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+//            scrollPane.setBounds(0,0,300,400);
+//            scrollPane.setBackground(Color.black);
+//            JPanel panel = new JPanel();
+//            panel.setBounds(0,0,300,700);
+            int y = 70;
             for (Trip next : trips) {
                 JLabel label =
                         new JLabel("Trip #" + (trips.indexOf(next) + 1) + " - " + next.getLocation().toUpperCase()
@@ -65,7 +94,9 @@ public class LogPanel extends JPanel implements ActionListener {
                 label.setForeground(Color.white);
                 label.setFont(font.deriveFont(12f));
                 label.setBounds(20, y, 280, 15);
-                add(label);
+                if ((trips.indexOf(next) + 1) <= 15) {
+                    add(label);
+                }
                 y += 25;
             }
         }

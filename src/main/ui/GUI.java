@@ -226,7 +226,7 @@ public class GUI {
 
     public void switchToNewPanel() {
         frame.getContentPane().remove(mainPanel);
-        frame.getContentPane().add(newPanel);
+        frame.getContentPane().add(new NewTripPanel(this));
         frame.revalidate();
     }
 
