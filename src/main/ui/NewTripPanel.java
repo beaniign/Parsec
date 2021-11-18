@@ -1,5 +1,7 @@
 package ui;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import javax.swing.*;
 import javax.swing.Timer;
 
@@ -31,7 +33,6 @@ public class NewTripPanel extends JPanel implements ActionListener {
     JLabel currentTime;
     JLabel unexpectedTime;
     JLabel unexpectedNote;
-    JLabel chooseDestination;
     JLabel noteLabel;
     String currentTrip;
     long startTime;
@@ -56,11 +57,11 @@ public class NewTripPanel extends JPanel implements ActionListener {
             System.out.println("IOException Caught");
         }
         labelsSetUp();
-        add(chooseDestination);
         setLayout(null);
         buttonsSetUp();
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setPreferredSize(new Dimension(300, 539));
+        add(quitButton);
     }
 
     public void textFieldSetUp() {
@@ -102,16 +103,16 @@ public class NewTripPanel extends JPanel implements ActionListener {
         returnButton.setBackground(darkGray);
         returnButton.setBorderPainted(false);
         returnButton.setForeground(lightGray);
-        returnButton.setFont(font.deriveFont(18f));
+        returnButton.setFont(font.deriveFont(17f));
         returnButton.setFocusPainted(false);
         returnButton.setBounds(60, 310, 180, 40);
         returnButton.addActionListener(this);
         quitButton.setBackground(darkGray);
         quitButton.setBorderPainted(false);
         quitButton.setForeground(lightGray);
-        quitButton.setFont(font.deriveFont(15f));
+        quitButton.setFont(font.deriveFont(17f));
         quitButton.setFocusPainted(false);
-        quitButton.setBounds(20, 490, 260, 40);
+        quitButton.setBounds(20, 480, 260, 40);
         quitButton.addActionListener(this);
         moonButton = new JButton("Moon - Requires 15 mins");
         marsButton = new JButton("Mars - Requires 30 mins");
@@ -130,18 +131,15 @@ public class NewTripPanel extends JPanel implements ActionListener {
             next.setForeground(lightGray);
             next.setFont(font.deriveFont(17f));
             next.setFocusPainted(false);
-            next.setBounds(20, y, 260, 40);
+            next.setBounds(20, y, 260, 60);
             next.addActionListener(this);
             add(next);
-            y -= 50;
+            y -= 70;
         }
     }
 
     public void labelsSetUp() {
-        chooseDestination = new JLabel("Choose Your Destination:");
-        chooseDestination.setForeground(Color.white);
-        chooseDestination.setFont(font.deriveFont(15f));
-        chooseDestination.setBounds(60, 160, 250, 100);
+        //TODO = create background with "Choose Your Destination Stylized
         unexpectedTime = new JLabel("Time not allowed!");
         unexpectedTime.setBounds(85, 20, 250, 20);
         unexpectedTime.setForeground(Color.red);
@@ -274,8 +272,6 @@ public class NewTripPanel extends JPanel implements ActionListener {
     @SuppressWarnings("methodlength")
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == quitButton) {
-            remove(quitButton);
-            menuSetUp(gui);
             gui.switchBackToMain();
         }
         if (e.getSource() == startButton) {
