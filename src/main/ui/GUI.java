@@ -3,7 +3,6 @@ package ui;
 import model.Colony;
 import model.Trip;
 import model.TripLog;
-import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -99,10 +98,6 @@ public class GUI {
         isSaved = false;
     }
 
-    public void setIsSaved() {
-        isSaved = false;
-    }
-
     public void setLocation(String s, int i) {
         switch (s) {
             case "Moon":
@@ -175,8 +170,8 @@ public class GUI {
 
     public void deleteTripLog(int i) throws TripDoesNotExistException {
         int index = i - 1;
-        if (index < 0) {
-            System.out.println("The index cannot be negative or zero!");
+        if (index < 0 || index >= log.logSize()) {
+            throw new TripDoesNotExistException();
         } else {
             removePopulation(log.getTrip(index));
             log.deleteLogElement(index);
@@ -220,7 +215,6 @@ public class GUI {
         moon.setLevel();
         jupiter.setLevel();
         saturn.setLevel();
-        System.out.println("Your log has been cleared!");
         isSaved = false;
     }
 

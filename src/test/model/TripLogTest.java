@@ -1,6 +1,5 @@
 package model;
 
-import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -67,6 +66,11 @@ public class TripLogTest {
         assertEquals(0, testTripLog.length());
     }
 
+    @Test
+    void testLogSize() {
+        testTripLog.addTrip(testTrip1);
+        assertEquals(1, testTripLog.logSize());
+    }
     @Test
     void testDeleteLogElementTYPICAL() {
         testTripLog.addTrip(testTrip1);

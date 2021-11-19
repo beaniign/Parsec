@@ -1,7 +1,6 @@
 package ui;
 
 import model.*;
-import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 import persistence.JsonReader;
 import persistence.JsonWriter;

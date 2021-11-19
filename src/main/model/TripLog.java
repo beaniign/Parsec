@@ -1,6 +1,5 @@
 package model;
 
-import model.exception.EmptyLogException;
 import model.exception.TripDoesNotExistException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,6 +49,10 @@ public class TripLog implements Writable {
     // EFFECTS: removes all elements within a trip log
     public void clearTripLog() {
         trips.clear();
+    }
+
+    public int logSize() {
+        return trips.size();
     }
 
     // MODIFIES: this

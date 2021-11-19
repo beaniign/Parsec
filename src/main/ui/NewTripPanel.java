@@ -38,7 +38,7 @@ public class NewTripPanel extends JPanel implements ActionListener {
     long startTime;
     GUI gui;
     Font font;
-    Image bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+    Image bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Choose_Destination.gif");
     List<JButton> buttons;
     Timer timer;
 
@@ -47,7 +47,7 @@ public class NewTripPanel extends JPanel implements ActionListener {
     }
 
     public void menuSetUp(GUI gui) {
-        bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+        bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Choose_Destination.gif");
         this.gui = gui;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));

@@ -5,20 +5,23 @@ import model.TripLog;
 import model.exception.TripDoesNotExistException;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
-
+//https://stackoverflow.com/questions/55454479/how-to-change-the-color-of-scrollbar-in-jscrollpane
+//https://stackoverflow.com/questions/11074172/change-background-color-of-scrollbar-end-buttons
 public class LogPanel extends JPanel implements ActionListener {
     private GUI gui;
     private Font font;
     private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
-    private Color darkGray = new Color(54, 54, 54);
+    private Color darkerGray = new Color(54, 54, 54);
+    private Color darkGray = new Color(70, 70, 70);
     private Color lightGray = new Color(200, 200, 200);
+    JPanel displayPanel;
     JButton deleteButton;
     JButton clearButton;
     JButton exitButton;
@@ -26,7 +29,12 @@ public class LogPanel extends JPanel implements ActionListener {
     JButton confirmClearButton;
     JButton returnButton;
     JTextField indexToDelete;
+    JScrollPane scrollPane;
+    JLabel warningBody1;
+    JLabel warningBody2;
+    JLabel warning;
     private int index;
+    private int size;
     private TripLog trips;
 
     public LogPanel(GUI gui, TripLog tripLog) {
@@ -41,11 +49,45 @@ public class LogPanel extends JPanel implements ActionListener {
     }
 
     public void setUp() {
+        scrollSetUp();
         labelSetUp(trips);
         buttonsSetUp();
         setLayout(null);
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         setPreferredSize(new Dimension(300, 539));
+    }
+
+    @SuppressWarnings("methodlength")
+    public void scrollSetUp() {
+        displayPanel = new JPanel();
+        displayPanel.setPreferredSize(new Dimension(0, (trips.logSize() * 18 + 5)));
+        displayPanel.setBackground(Color.darkGray);
+        scrollPane = new JScrollPane(displayPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setBounds(20, 20, 260, 420);
+        scrollPane.setBorder(BorderFactory.createLineBorder(darkerGray));
+        scrollPane.setBackground(darkerGray);
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(140, 140, 140);
+            }
+
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                JButton button = super.createDecreaseButton(orientation);
+                button.setVisible(false);
+                return button;
+            }
+
+            @Override
+            protected JButton createIncreaseButton(int orientation) {
+                JButton button = super.createIncreaseButton(orientation);
+                button.setVisible(false);
+                return button;
+            }
+        });
+        scrollPane.getVerticalScrollBar().setBackground(darkerGray);
     }
 
     public void labelSetUp(TripLog tripLog) {
@@ -57,48 +99,19 @@ public class LogPanel extends JPanel implements ActionListener {
             label.setBounds(10, 240, 280, 50);
             label.setHorizontalAlignment(SwingConstants.CENTER);
             add(label);
-
-//        }
-//        else if (trips.size() > 15) {
-//            List<Trip> limitedTrips = new ArrayList<>();
-//            int remaining = (trips.size() - 15);
-//            while (remaining > 0) {
-//                limitedTrips.add(trips.get(trips.size() - 1));
-//                remaining -= 1;
-//            }
-//
-//            int y = 40;
-//            for (Trip next : limitedTrips) {
-//                JLabel label =
-//                        new JLabel("Trip #" + (trips.indexOf(next) + 1) + " - " + next.getLocation().toUpperCase()
-//                                + " - " + next.getDuration() + "mins - Note: " + next.getNote());
-//                label.setForeground(Color.white);
-//                label.setFont(font.deriveFont(12f));
-//                label.setBounds(20, y, 280, 15);
-//                add(label);
-//                y += 25;
-//            }
         } else {
-//            JScrollPane scrollPane = new JScrollPane();
-//            scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//            scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-//            scrollPane.setBounds(0,0,300,400);
-//            scrollPane.setBackground(Color.black);
-//            JPanel panel = new JPanel();
-//            panel.setBounds(0,0,300,700);
-            int y = 70;
+            int y = 30;
             for (Trip next : trips) {
                 JLabel label =
                         new JLabel("Trip #" + (trips.indexOf(next) + 1) + " - " + next.getLocation().toUpperCase()
-                                + " - " + next.getDuration() + "mins - Note: " + next.getNote());
+                                + " - " + next.getDuration() + "mins - " + next.getNote());
                 label.setForeground(Color.white);
                 label.setFont(font.deriveFont(12f));
-                label.setBounds(20, y, 280, 15);
-                if ((trips.indexOf(next) + 1) <= 15) {
-                    add(label);
-                }
-                y += 25;
+                label.setBounds(20, y, 200, 15);
+                displayPanel.add(label);
+                y += 51;
             }
+            add(scrollPane);
         }
     }
 
@@ -115,7 +128,7 @@ public class LogPanel extends JPanel implements ActionListener {
     }
 
     public void buttonStyle(JButton button) {
-        button.setBackground(darkGray);
+        button.setBackground(darkerGray);
         button.setBorderPainted(false);
         button.setForeground(lightGray);
         button.setFont(font.deriveFont(15f));
@@ -128,7 +141,7 @@ public class LogPanel extends JPanel implements ActionListener {
         addWarning();
         addReturn();
         confirmClearButton = new JButton("Clear");
-        confirmClearButton.setBackground(darkGray);
+        confirmClearButton.setBackground(darkerGray);
         confirmClearButton.setBorderPainted(false);
         confirmClearButton.setForeground(lightGray);
         confirmClearButton.setFont(font.deriveFont(15f));
@@ -144,12 +157,12 @@ public class LogPanel extends JPanel implements ActionListener {
         indexToDelete = new JTextField("Enter # of Trip to Delete Here");
         indexToDelete.setBounds(20, 230, 260, 60);
         indexToDelete.setFont(font.deriveFont(15f));
-        indexToDelete.setBackground(darkGray);
+        indexToDelete.setBackground(darkerGray);
         indexToDelete.setForeground(Color.white);
         indexToDelete.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         indexToDelete.setHorizontalAlignment(JTextField.CENTER);
         confirmDeleteButton = new JButton("Delete");
-        confirmDeleteButton.setBackground(darkGray);
+        confirmDeleteButton.setBackground(darkerGray);
         confirmDeleteButton.setBorderPainted(false);
         confirmDeleteButton.setForeground(lightGray);
         confirmDeleteButton.setFont(font.deriveFont(15f));
@@ -161,14 +174,14 @@ public class LogPanel extends JPanel implements ActionListener {
     }
 
     public void addWarning() {
-        JLabel warning = new JLabel("!WARNING!");
+        warning = new JLabel("!WARNING!");
         warning.setForeground(Color.red);
         warning.setFont(font.deriveFont(45f));
         warning.setBounds(30, 100, 240, 60);
         add(warning);
         warning.setHorizontalAlignment(JTextField.CENTER);
-        JLabel warningBody1 = new JLabel("This action will remove the population &");
-        JLabel warningBody2 = new JLabel("level(s) gained with the removed trip(s)");
+        warningBody1 = new JLabel("This action will remove the population &");
+        warningBody2 = new JLabel("level(s) gained with the removed trip(s)");
         warningBody1.setForeground(Color.red);
         warningBody1.setFont(font.deriveFont(12f));
         warningBody1.setBounds(30, 150, 240, 20);
@@ -183,7 +196,7 @@ public class LogPanel extends JPanel implements ActionListener {
 
     public void addReturn() {
         returnButton = new JButton("Return");
-        returnButton.setBackground(darkGray);
+        returnButton.setBackground(darkerGray);
         returnButton.setBorderPainted(false);
         returnButton.setForeground(lightGray);
         returnButton.setFont(font.deriveFont(15f));
@@ -198,6 +211,7 @@ public class LogPanel extends JPanel implements ActionListener {
         g.drawImage(img, 0, 0, this);
     }
 
+    @SuppressWarnings("methodlength")
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exitButton) {
@@ -221,6 +235,10 @@ public class LogPanel extends JPanel implements ActionListener {
                     gui.deleteTripLog(index);
                     removeAll();
                     setUp();
+                    scrollPane.revalidate();
+                    scrollPane.repaint();
+                    displayPanel.revalidate();
+                    displayPanel.repaint();
                 } catch (NumberFormatException | TripDoesNotExistException exception) {
                     JLabel label = new JLabel("Please Enter a Valid #!");
                     label.setForeground(Color.red);
@@ -229,11 +247,13 @@ public class LogPanel extends JPanel implements ActionListener {
                     label.setHorizontalAlignment(JTextField.CENTER);
                     add(label);
                 }
+
             }
         }
         if (e.getSource() == returnButton) {
             removeAll();
             setUp();
+
         }
         if (e.getSource() == clearButton) {
             removeAll();
