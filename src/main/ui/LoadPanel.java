@@ -33,8 +33,7 @@ public class LoadPanel extends JPanel implements ActionListener {
 
     // EFFECTS: constructs label and apply styling
     public void labelSetUp() {
-        JLabel label = new JLabel();
-        label.setText("Trip Logs Loaded!");
+        JLabel label = new JLabel("Trip Logs Loaded!");
         label.setForeground(Color.white);
         label.setFont(font.deriveFont(20f));
         label.setBounds(65, 200, 200, 100);

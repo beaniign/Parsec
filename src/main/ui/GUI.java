@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
-// Below are a collection of resources that assisted me in creating the Parsec App:
+// Below are a collection of resources that assisted me in creating the Parsec GUI:
 // https://www.tutorialspoint.com/how-to-set-the-location-of-a-button-anywhere-in-jframe
 // https://stackoverflow.com/questions/6593322/why-does-the-jframe-setsize-method-not-set-the-size-correctly
 // https://stackoverflow.com/questions/20462167/increasing-font-size-in-a-jbutton
@@ -26,14 +26,15 @@ import java.util.List;
 // https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html
 // https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
 // https://stackoverflow.com/questions/10820033/make-a-simple-timer-in-java/14323134
-
+// https://stackoverflow.com/questions/55454479/how-to-change-the-color-of-scrollbar-in-jscrollpane
+// https://stackoverflow.com/questions/11074172/change-background-color-of-scrollbar-end-buttons
 
 // represents the GUI for Parsec
 public class GUI {
     private static final String SAVED_LOGS = "./data/logbook.json";
+    private boolean isSaved;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-    private boolean isSaved;
 
     private JFrame frame;
     private JPanel mainPanel;
@@ -57,9 +58,9 @@ public class GUI {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a JsonWriter and JsonReader, sets the isSaved field to true as there are no changes made yet
+    // EFFECTS: creates a JsonWriter and JsonReader, sets the isSaved field to false as nothing's been saved yet
     public void initializeJson() {
-        isSaved = true;
+        isSaved = false;
         jsonWriter = new JsonWriter(SAVED_LOGS);
         jsonReader = new JsonReader(SAVED_LOGS);
     }

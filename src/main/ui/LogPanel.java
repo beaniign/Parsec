@@ -12,31 +12,27 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
 
-//https://stackoverflow.com/questions/55454479/how-to-change-the-color-of-scrollbar-in-jscrollpane
-//https://stackoverflow.com/questions/11074172/change-background-color-of-scrollbar-end-buttons
+// represents the panel to display log trips from saved files
 public class LogPanel extends JPanel implements ActionListener {
+    private static final Image IMG =
+            Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+    private static final Color DARK_GRAY = new Color(54, 54, 54);
+    private static final Color LIGHT_GRAY = new Color(200, 200, 200);
     private GUI gui;
     private Font font;
-    private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
-    private Color darkerGray = new Color(54, 54, 54);
-    private Color darkGray = new Color(70, 70, 70);
-    private Color lightGray = new Color(200, 200, 200);
-    JPanel displayPanel;
-    JButton deleteButton;
-    JButton clearButton;
-    JButton exitButton;
-    JButton confirmDeleteButton;
-    JButton confirmClearButton;
-    JButton returnButton;
-    JTextField indexToDelete;
-    JScrollPane scrollPane;
-    JLabel warningBody1;
-    JLabel warningBody2;
-    JLabel warning;
-    private int index;
-    private int size;
+    private JPanel displayPanel;
+    private JButton deleteButton;
+    private JButton clearButton;
+    private JButton exitButton;
+    private JButton confirmDeleteButton;
+    private JButton confirmClearButton;
+    private JButton returnButton;
+    private JTextField indexToDelete;
+    private JScrollPane scrollPane;
     private TripLog trips;
 
+    // MODIFIES: this
+    // EFFECTS: constructor for LogPanel
     public LogPanel(GUI gui, TripLog tripLog) {
         this.trips = tripLog;
         this.gui = gui;
@@ -48,6 +44,8 @@ public class LogPanel extends JPanel implements ActionListener {
         setUp();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up visual components including panel size, button and label
     public void setUp() {
         scrollSetUp();
         labelSetUp(trips);
@@ -57,6 +55,8 @@ public class LogPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(300, 539));
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the scroll pane containing a panel which then contains the trips' information
     @SuppressWarnings("methodlength")
     public void scrollSetUp() {
         displayPanel = new JPanel();
@@ -65,8 +65,8 @@ public class LogPanel extends JPanel implements ActionListener {
         scrollPane = new JScrollPane(displayPanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setBounds(20, 20, 260, 420);
-        scrollPane.setBorder(BorderFactory.createLineBorder(darkerGray));
-        scrollPane.setBackground(darkerGray);
+        scrollPane.setBorder(BorderFactory.createLineBorder(DARK_GRAY));
+        scrollPane.setBackground(DARK_GRAY);
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
@@ -87,9 +87,11 @@ public class LogPanel extends JPanel implements ActionListener {
                 return button;
             }
         });
-        scrollPane.getVerticalScrollBar().setBackground(darkerGray);
+        scrollPane.getVerticalScrollBar().setBackground(DARK_GRAY);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the labels that contain the trips' information
     public void labelSetUp(TripLog tripLog) {
         List<Trip> trips = tripLog.convertTripLogToList();
         if (trips.isEmpty()) {
@@ -115,6 +117,8 @@ public class LogPanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up delete, clear, and exit buttons, then makes a call to style them
     public void buttonsSetUp() {
         deleteButton = new JButton("Delete");
         deleteButton.setBounds(20, 449, 125, 30);
@@ -127,23 +131,26 @@ public class LogPanel extends JPanel implements ActionListener {
         buttonStyle(exitButton);
     }
 
+    // EFFECTS: styles the given button
     public void buttonStyle(JButton button) {
-        button.setBackground(darkerGray);
+        button.setBackground(DARK_GRAY);
         button.setBorderPainted(false);
-        button.setForeground(lightGray);
+        button.setForeground(LIGHT_GRAY);
         button.setFont(font.deriveFont(15f));
         button.setFocusPainted(false);
         button.addActionListener(this);
         add(button);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the screen to confirm the user's intent to clear the trip log and adds warnings
     public void setUpClearOptions() {
         addWarning();
         addReturn();
         confirmClearButton = new JButton("Clear");
-        confirmClearButton.setBackground(darkerGray);
+        confirmClearButton.setBackground(DARK_GRAY);
         confirmClearButton.setBorderPainted(false);
-        confirmClearButton.setForeground(lightGray);
+        confirmClearButton.setForeground(LIGHT_GRAY);
         confirmClearButton.setFont(font.deriveFont(15f));
         confirmClearButton.setFocusPainted(false);
         confirmClearButton.addActionListener(this);
@@ -151,20 +158,22 @@ public class LogPanel extends JPanel implements ActionListener {
         add(confirmClearButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the screen to confirm the user's intent to delete a trip and adds warnings
     public void setUpDeleteOptions() {
         addWarning();
         addReturn();
         indexToDelete = new JTextField("Enter # of Trip to Delete Here");
         indexToDelete.setBounds(20, 230, 260, 60);
         indexToDelete.setFont(font.deriveFont(15f));
-        indexToDelete.setBackground(darkerGray);
+        indexToDelete.setBackground(DARK_GRAY);
         indexToDelete.setForeground(Color.white);
         indexToDelete.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         indexToDelete.setHorizontalAlignment(JTextField.CENTER);
         confirmDeleteButton = new JButton("Delete");
-        confirmDeleteButton.setBackground(darkerGray);
+        confirmDeleteButton.setBackground(DARK_GRAY);
         confirmDeleteButton.setBorderPainted(false);
-        confirmDeleteButton.setForeground(lightGray);
+        confirmDeleteButton.setForeground(LIGHT_GRAY);
         confirmDeleteButton.setFont(font.deriveFont(15f));
         confirmDeleteButton.setFocusPainted(false);
         confirmDeleteButton.addActionListener(this);
@@ -173,15 +182,16 @@ public class LogPanel extends JPanel implements ActionListener {
         add(indexToDelete);
     }
 
+    // EFFECTS: adds warning labels to the panel
     public void addWarning() {
-        warning = new JLabel("!WARNING!");
+        JLabel warning = new JLabel("!WARNING!");
         warning.setForeground(Color.red);
         warning.setFont(font.deriveFont(45f));
         warning.setBounds(30, 100, 240, 60);
         add(warning);
         warning.setHorizontalAlignment(JTextField.CENTER);
-        warningBody1 = new JLabel("This action will remove the population &");
-        warningBody2 = new JLabel("level(s) gained with the removed trip(s)");
+        JLabel warningBody1 = new JLabel("This action will remove the population &");
+        JLabel warningBody2 = new JLabel("level(s) gained with the removed trip(s)");
         warningBody1.setForeground(Color.red);
         warningBody1.setFont(font.deriveFont(12f));
         warningBody1.setBounds(30, 150, 240, 20);
@@ -194,11 +204,13 @@ public class LogPanel extends JPanel implements ActionListener {
         add(warningBody2);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates and adds a return button
     public void addReturn() {
         returnButton = new JButton("Return");
-        returnButton.setBackground(darkerGray);
+        returnButton.setBackground(DARK_GRAY);
         returnButton.setBorderPainted(false);
-        returnButton.setForeground(lightGray);
+        returnButton.setForeground(LIGHT_GRAY);
         returnButton.setFont(font.deriveFont(15f));
         returnButton.setFocusPainted(false);
         returnButton.addActionListener(this);
@@ -206,11 +218,23 @@ public class LogPanel extends JPanel implements ActionListener {
         add(returnButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the background of the panel
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, this);
+        g.drawImage(IMG, 0, 0, this);
     }
 
+    // EFFECTS: perform actions when a button is pressed
+    //          if the exit button is pressed, tells the gui to switch back to the main panel
+    //          if the delete button is pressed, sets up delete options to confirm user intent
+    //          if the confirm delete button is pressed, checks if the given index is valid (throws
+    //          exceptions if it isn't valid i.e. if the index number DNE in the log, or is negative), then deletes a
+    //          trip from the trip log via a call mto gui and resets the panel
+    //          if the return button is pressed, refreshes the display components (note this is used within the
+    //          confirm-delete and confirm-clear menu, thus returns user back to the log panel)
+    //          if the clear button is pressed, sets up clear options to confirm user intent
+    //          if the confirm clear button is pressed, clears the trip log via a call to gui, then resets the panel
     @SuppressWarnings("methodlength")
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -231,14 +255,11 @@ public class LogPanel extends JPanel implements ActionListener {
                 add(label);
             } else {
                 try {
-                    index = Integer.parseInt(indexToDelete.getText());
+                    int index = Integer.parseInt(indexToDelete.getText());
                     gui.deleteTripLog(index);
                     removeAll();
                     setUp();
                     scrollPane.revalidate();
-                    scrollPane.repaint();
-                    displayPanel.revalidate();
-                    displayPanel.repaint();
                 } catch (NumberFormatException | TripDoesNotExistException exception) {
                     JLabel label = new JLabel("Please Enter a Valid #!");
                     label.setForeground(Color.red);
@@ -247,13 +268,12 @@ public class LogPanel extends JPanel implements ActionListener {
                     label.setHorizontalAlignment(JTextField.CENTER);
                     add(label);
                 }
-
             }
         }
         if (e.getSource() == returnButton) {
             removeAll();
             setUp();
-
+            scrollPane.revalidate();
         }
         if (e.getSource() == clearButton) {
             removeAll();
