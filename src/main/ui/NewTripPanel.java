@@ -1,7 +1,5 @@
 package ui;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import javax.swing.*;
 import javax.swing.Timer;
 
@@ -139,7 +137,6 @@ public class NewTripPanel extends JPanel implements ActionListener {
     }
 
     public void labelsSetUp() {
-        //TODO = create background with "Choose Your Destination Stylized
         unexpectedTime = new JLabel("Time not allowed!");
         unexpectedTime.setBounds(85, 20, 250, 20);
         unexpectedTime.setForeground(Color.red);
