@@ -12,33 +12,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-//https://stackoverflow.com/questions/2281937/swing-jtextfield-how-to-remove-the-border
-//https://docs.oracle.com/javase/7/docs/api/java/util/Timer.html
-//https://docs.oracle.com/javase/tutorial/uiswing/misc/timer.html
-//https://stackoverflow.com/questions/10820033/make-a-simple-timer-in-java/14323134
+
 public class NewTripPanel extends JPanel implements ActionListener {
-    Color darkGray = new Color(54, 54, 54);
-    private Color lightGray = new Color(200, 200, 200);
-    JButton moonButton;
-    JButton marsButton;
-    JButton saturnButton;
-    JButton jupiterButton;
-    JButton quitButton;
-    JButton startButton;
-    JButton returnButton;
-    JTextField duration;
-    JTextField note;
-    JLabel currentTime;
-    JLabel unexpectedTime;
-    JLabel unexpectedNote;
-    JLabel noteLabel;
-    String currentTrip;
-    long startTime;
-    GUI gui;
-    Font font;
-    Image bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Choose_Destination.gif");
-    List<JButton> buttons;
-    Timer timer;
+    private static final Color DARK_GRAY = new Color(54, 54, 54);
+    private static final Color LIGHT_GRAY = new Color(200, 200, 200);
+
+    private JButton moonButton;
+    private JButton marsButton;
+    private JButton saturnButton;
+    private JButton jupiterButton;
+    private JButton quitButton;
+    private JButton startButton;
+    private JButton returnButton;
+
+    private JTextField duration;
+    private JTextField note;
+
+    private JLabel currentTime;
+    private JLabel unexpectedTime;
+    private JLabel unexpectedNote;
+    private JLabel noteLabel;
+
+    private long startTime;
+    private Timer timer;
+    private String currentTrip;
+    private GUI gui;
+    private Font font;
+    private Image bgImg;
+    private List<JButton> buttons;
+
 
     public NewTripPanel(GUI gui) {
         menuSetUp(gui);
@@ -73,7 +75,7 @@ public class NewTripPanel extends JPanel implements ActionListener {
         note = new JTextField("");
         note.setBounds(60, 190, 180, 60);
         note.setFont(font.deriveFont(25f));
-        note.setBackground(darkGray);
+        note.setBackground(DARK_GRAY);
         note.setForeground(Color.white);
         note.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         note.setHorizontalAlignment(JTextField.CENTER);
@@ -90,24 +92,24 @@ public class NewTripPanel extends JPanel implements ActionListener {
         }
         quitButton = new JButton("Return");
         startButton = new JButton("Begin Journey");
-        startButton.setBackground(darkGray);
+        startButton.setBackground(DARK_GRAY);
         startButton.setBorderPainted(false);
-        startButton.setForeground(lightGray);
+        startButton.setForeground(LIGHT_GRAY);
         startButton.setFont(font.deriveFont(18f));
         startButton.setFocusPainted(false);
         startButton.setBounds(60, 260, 180, 40);
         startButton.addActionListener(this);
         returnButton = new JButton("Return");
-        returnButton.setBackground(darkGray);
+        returnButton.setBackground(DARK_GRAY);
         returnButton.setBorderPainted(false);
-        returnButton.setForeground(lightGray);
+        returnButton.setForeground(LIGHT_GRAY);
         returnButton.setFont(font.deriveFont(17f));
         returnButton.setFocusPainted(false);
         returnButton.setBounds(60, 310, 180, 40);
         returnButton.addActionListener(this);
-        quitButton.setBackground(darkGray);
+        quitButton.setBackground(DARK_GRAY);
         quitButton.setBorderPainted(false);
-        quitButton.setForeground(lightGray);
+        quitButton.setForeground(LIGHT_GRAY);
         quitButton.setFont(font.deriveFont(17f));
         quitButton.setFocusPainted(false);
         quitButton.setBounds(20, 480, 260, 40);
@@ -124,9 +126,9 @@ public class NewTripPanel extends JPanel implements ActionListener {
 
         int y = 380;
         for (JButton next : buttons) {
-            next.setBackground(darkGray);
+            next.setBackground(DARK_GRAY);
             next.setBorderPainted(false);
-            next.setForeground(lightGray);
+            next.setForeground(LIGHT_GRAY);
             next.setFont(font.deriveFont(17f));
             next.setFocusPainted(false);
             next.setBounds(20, y, 260, 60);
@@ -149,7 +151,7 @@ public class NewTripPanel extends JPanel implements ActionListener {
         unexpectedNote.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         noteLabel = new JLabel("Enter Trip Notes Below:");
         noteLabel.setBounds(65, 125, 250, 100);
-        noteLabel.setForeground(lightGray);
+        noteLabel.setForeground(LIGHT_GRAY);
         noteLabel.setFont(font.deriveFont(15f));
         noteLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder());
     }
@@ -199,7 +201,7 @@ public class NewTripPanel extends JPanel implements ActionListener {
         currentTime.setBounds(25, 195, 250, 100);
         currentTime.setHorizontalAlignment(SwingConstants.CENTER);
         currentTime.setForeground(Color.white);
-        currentTime.setFont(font.deriveFont(60f));
+        currentTime.setFont(font.deriveFont(80f));
         currentTime.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         add(currentTime);
         startTime = System.currentTimeMillis();

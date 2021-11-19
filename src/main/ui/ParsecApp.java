@@ -443,6 +443,8 @@ public class ParsecApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up levels of colonies based on the current state of the trip log
     private void lvlSetupFromSaved() {
         List<Trip> trips;
         trips = log.convertTripLogToList();

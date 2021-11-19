@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-public class LevelMenu extends JPanel implements ActionListener {
+public class LevelPanel extends JPanel implements ActionListener {
     private GUI gui;
     private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
     private Color notGray = new Color(54, 54, 54);
@@ -19,7 +19,7 @@ public class LevelMenu extends JPanel implements ActionListener {
     private JButton exitButton;
     private Font font;
 
-    public LevelMenu(GUI gui, Colony moon, Colony mars, Colony jupiter, Colony saturn) {
+    public LevelPanel(GUI gui, Colony moon, Colony mars, Colony jupiter, Colony saturn) {
         this.gui = gui;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
@@ -36,12 +36,14 @@ public class LevelMenu extends JPanel implements ActionListener {
 
     public void buttonsSetUp() {
         exitButton = new JButton("Return");
-        exitButton.setBackground(notGray);
+        exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
         exitButton.setBorderPainted(false);
-        exitButton.setForeground(lightGray);
+        exitButton.setForeground(Color.white);
         exitButton.setFont(font.deriveFont(15f));
         exitButton.setFocusPainted(false);
-        exitButton.setBounds(20, 490, 260, 30);
+        exitButton.setBounds(15, 490, 260, 30);
+        exitButton.setHorizontalAlignment(SwingConstants.LEFT);
         exitButton.addActionListener(this);
     }
 
