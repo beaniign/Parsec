@@ -5,30 +5,28 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+// represents the panel that displays options to quit
 public class QuitPanel extends JPanel implements ActionListener {
+    private static final Image IMG = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
+    private static final Color DARK_GRAY = new Color(54, 54, 54);
+    private static final Color LIGHT_GRAY = new Color(200, 200, 200);
     private GUI gui;
     private Font font;
-    private Image img = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Background.gif");
-    private Color darkGray = new Color(54, 54, 54);
-    private Color lightGray = new Color(200, 200, 200);
     private JButton returnButton;
     private JButton yesButton;
     private JButton noButton;
 
-
+    // MODIFIES: this
+    // EFFECTS: constructor for QuitPanel, calls methods to set up the visual components
     public QuitPanel(GUI gui) {
         this.gui = gui;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
-        } catch (FontFormatException e) {
-            System.out.println("Font not accepted");
-        } catch (IOException e) {
-            System.out.println("IOException Caught");
+        } catch (Exception e) {
+            System.out.println("Exception Caught");
         }
         yesButton = new JButton("Save");
         noButton = new JButton("Don't Save");
@@ -44,6 +42,8 @@ public class QuitPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(300, 539));
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the labels that tells the user that their changes are not saved
     public void labelSetUp() {
         JLabel label = new JLabel();
         label.setText("Your trips are not saved!");
@@ -53,13 +53,15 @@ public class QuitPanel extends JPanel implements ActionListener {
         add(label);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up and styles the buttons
     public void buttonsSetUp(List<JButton> buttons) {
         int y = 270;
         for (JButton next : buttons) {
             next.setBounds(90, y, 120, 30);
-            next.setBackground(darkGray);
+            next.setBackground(DARK_GRAY);
             next.setBorderPainted(false);
-            next.setForeground(lightGray);
+            next.setForeground(LIGHT_GRAY);
             next.setFont(font.deriveFont(15f));
             next.setFocusPainted(false);
             next.addActionListener(this);
@@ -69,11 +71,18 @@ public class QuitPanel extends JPanel implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the background of the panel
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, this);
+        g.drawImage(IMG, 0, 0, this);
     }
 
+
+    // EFFECTS: perform actions when a button is pressed
+    //          if the returnButton is pressed, tells the gui to switch back to the main panel
+    //          if the noButton is pressed, terminates the application
+    //          if the yesButton is pressed, tells the gui to save the changes then terminates the application
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == returnButton) {

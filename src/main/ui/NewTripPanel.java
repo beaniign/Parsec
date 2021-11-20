@@ -7,12 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
+// represents the panel that displays options to create a new trip
 public class NewTripPanel extends JPanel implements ActionListener {
     private static final Color DARK_GRAY = new Color(54, 54, 54);
     private static final Color LIGHT_GRAY = new Color(200, 200, 200);
@@ -41,20 +39,21 @@ public class NewTripPanel extends JPanel implements ActionListener {
     private Image bgImg;
     private List<JButton> buttons;
 
-
+    // EFFECTS: constructor
     public NewTripPanel(GUI gui) {
         menuSetUp(gui);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the size of the panel and calls methods to set up components of the panel such as buttons and
+    //          labels
     public void menuSetUp(GUI gui) {
         bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Choose_Destination.gif");
         this.gui = gui;
         try {
             font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
-        } catch (FontFormatException e) {
-            System.out.println("Font not accepted");
-        } catch (IOException e) {
-            System.out.println("IOException Caught");
+        } catch (Exception e) {
+            System.out.println("Exception Caught");
         }
         labelsSetUp();
         setLayout(null);
@@ -64,6 +63,8 @@ public class NewTripPanel extends JPanel implements ActionListener {
         add(quitButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates text fields to read user input and styles them
     public void textFieldSetUp() {
         duration = new JTextField("15");
         duration.setBounds(60, 70, 180, 100);
@@ -81,15 +82,10 @@ public class NewTripPanel extends JPanel implements ActionListener {
         note.setHorizontalAlignment(JTextField.CENTER);
     }
 
+    // MODIFIES: this
+    // EFFECTS: constructs and styles the buttons
     @SuppressWarnings("methodlength")
     public void buttonsSetUp() {
-        try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/ui/fonts/Nagoda.ttf"));
-        } catch (FontFormatException e) {
-            System.out.println("Font not accepted");
-        } catch (IOException e) {
-            System.out.println("IOException Caught");
-        }
         quitButton = new JButton("Return");
         startButton = new JButton("Begin Journey");
         startButton.setBackground(DARK_GRAY);
@@ -138,6 +134,8 @@ public class NewTripPanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: constructs and styles the labels
     public void labelsSetUp() {
         unexpectedTime = new JLabel("Time not allowed!");
         unexpectedTime.setBounds(85, 20, 250, 20);
@@ -156,7 +154,9 @@ public class NewTripPanel extends JPanel implements ActionListener {
         noteLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder());
     }
 
-    public void newTrip() {
+    // MODIFIES: this
+    // EFFECTS: adds the components needed to form the new trip options menu, sets the default time based on location
+    public void setUpNewTripOptions() {
         textFieldSetUp();
         switch (currentTrip) {
             case "Moon":
@@ -179,6 +179,9 @@ public class NewTripPanel extends JPanel implements ActionListener {
         add(returnButton);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds trip timer on screen, switches background graphics based on the location, makes a call to start
+    //          a timer
     @SuppressWarnings("methodlength")
     public void startTrip() {
         removeAll();
@@ -208,25 +211,30 @@ public class NewTripPanel extends JPanel implements ActionListener {
         timerSetUp();
     }
 
+    // MODIFIES: this
+    // EFFECTS: constructs a timer and starts the timer
     public void timerSetUp() {
         timer = new Timer(1000, this);
         timer.addActionListener(this);
         timer.start();
     }
 
-    public void handleTripTime() {
-        int minimumTime = 0; //<- using 0 as minimum just for testing
+    // EFFECTS: handles the time and note given by user, checks if they adhere to the rules based on the chosen
+    //          location, if all conditions are meant, start the trip
+    public void handleTripInput() {
+//        int minimumTime = 0; //<- use 0 as minimum for testing
+        int minimumTime = 15;
         int maximumTime = 99;
         int inputTime = Integer.parseInt(duration.getText());
         switch (currentTrip) {
             case "Mars":
-//                minimumTime = 30;
+                minimumTime = 30;
                 break;
             case "Jupiter":
-//                minimumTime = 45;
+                minimumTime = 45;
                 break;
             case "Saturn":
-//                minimumTime = 60;
+                minimumTime = 60;
                 break;
         }
         if (inputTime < minimumTime || inputTime > maximumTime) {
@@ -239,7 +247,9 @@ public class NewTripPanel extends JPanel implements ActionListener {
         }
     }
 
-    public void handleTime() {
+    // MODIFIES: this
+    // EFFECTS: updates the timer based on the time, stop the time if the time left is less than or equal to 0
+    public void updateTime() {
         int elapsedTime = (int) (System.currentTimeMillis() - startTime);
         int timeLeft = (Integer.parseInt(duration.getText()) * 60000) - elapsedTime;
         long secondsLeft = timeLeft / 1000;
@@ -254,19 +264,30 @@ public class NewTripPanel extends JPanel implements ActionListener {
         }
         currentTime.setHorizontalAlignment(SwingConstants.CENTER);
         if (timeLeft <= 0) {
-
             timer.stop();
             remove(currentTime);
             add(quitButton);
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the background of the panel
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(bgImg, 0, 0, this);
     }
 
 
+    // EFFECTS: perform actions when a button is pressed
+    //          if the quitButton is pressed, tells the gui to switch to the main panel
+    //          if the startButton is pressed, calls handleTripInput to check if user inputs are valid before starting
+    //          if the moonButton is pressed, sets the current trip to moon, and sets up the trip options menu
+    //          if the marsButton is pressed, sets the current trip to mars, and sets up the trip options menu
+    //          if the jupiterButton is pressed, sets the current trip to jupiter, and sets up the trip options menu
+    //          if the saturnButton is pressed, sets the current trip to saturn, and sets up the trip options menu
+    //          if the returnButton is pressed, reloads the display components (note this is used within the
+    //          confirm-delete and confirm-clear menu, thus returns user back to the new trip panel)
+    //          if action is performed by the timer (i.e. time ticks), updates the timer on screen
     @Override
     @SuppressWarnings("methodlength")
     public void actionPerformed(ActionEvent e) {
@@ -276,35 +297,34 @@ public class NewTripPanel extends JPanel implements ActionListener {
         if (e.getSource() == startButton) {
             remove(unexpectedNote);
             remove(unexpectedTime);
-            handleTripTime();
+            handleTripInput();
         }
-
         if (e.getSource() == timer) {
-            handleTime();
+            updateTime();
         }
         if (e.getSource() == moonButton) {
             removeAll();
             currentTrip = "Moon";
             bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Moon_before.gif");
-            newTrip();
+            setUpNewTripOptions();
         }
         if (e.getSource() == marsButton) {
             removeAll();
             currentTrip = "Mars";
             bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Mars_before.gif");
-            newTrip();
+            setUpNewTripOptions();
         }
         if (e.getSource() == jupiterButton) {
             removeAll();
             currentTrip = "Jupiter";
             bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Jupiter_before.gif");
-            newTrip();
+            setUpNewTripOptions();
         }
         if (e.getSource() == saturnButton) {
             removeAll();
             currentTrip = "Saturn";
             bgImg = Toolkit.getDefaultToolkit().createImage("src/main/ui/images/Saturn_before.gif");
-            newTrip();
+            setUpNewTripOptions();
         }
         if (e.getSource() == returnButton) {
             removeAll();

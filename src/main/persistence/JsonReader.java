@@ -14,6 +14,7 @@ import org.json.*;
 // This class references code from JsonSerializationDemo
 // url: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 // Represents a reader that reads workroom from JSON data stored in file
+
 public class JsonReader {
     private String source;
 
@@ -22,7 +23,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads trip log from file and returns it;
     // throws IOException if an error occurs reading data from file
     public TripLog read() throws IOException {
         String jsonData = readFile(source);
@@ -48,8 +49,8 @@ public class JsonReader {
         return tl;
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingies from JSON object and adds them to workroom
+    // MODIFIES: tl
+    // EFFECTS: parses thingies from JSON object and adds them to trip log
     private void addTrips(TripLog tl, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("trips");
         for (Object json : jsonArray) {
@@ -58,8 +59,8 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: wr
-    // EFFECTS: parses thingy from JSON object and adds it to workroom
+    // MODIFIES: tl
+    // EFFECTS: parses thingy from JSON object and adds it to trip log
     private void addTrip(TripLog tl, JSONObject jsonObject) {
         int duration = jsonObject.getInt("duration");
         String location = jsonObject.getString("location");

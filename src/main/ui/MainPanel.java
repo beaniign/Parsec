@@ -9,13 +9,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// represents the main menu panel
 public class MainPanel extends JPanel implements ActionListener {
     private static final Image IMG = Toolkit.getDefaultToolkit().createImage(
             "src/main/ui/images/Main_Background.gif");
     private static GUI GUI;
 
-    private JButton newButton;
-    private JButton checkButton;
+    private JButton newTripButton;
+    private JButton logButton;
     private JButton saveButton;
     private JButton loadButton;
     private JButton levelButton;
@@ -24,6 +25,8 @@ public class MainPanel extends JPanel implements ActionListener {
     private Font font;
     private List<JButton> buttons;
 
+    // MODIFIES: this
+    // EFFECTS: constructor for MainPanel
     public MainPanel(GUI gui) {
         GUI = gui;
         setLayout(null);
@@ -35,6 +38,8 @@ public class MainPanel extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(300, 539));
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up ands styles buttons in the main menu
     @SuppressWarnings("methodlength")
     public void buttonsSetUp() {
         try {
@@ -44,8 +49,8 @@ public class MainPanel extends JPanel implements ActionListener {
         } catch (IOException e) {
             System.out.println("IOException Caught");
         }
-        newButton = new JButton("New Trip");
-        checkButton = new JButton("Trip Logs");
+        newTripButton = new JButton("New Trip");
+        logButton = new JButton("Trip Logs");
         levelButton = new JButton("Colony Levels");
         saveButton = new JButton("Save Changes");
         loadButton = new JButton("Load Trips");
@@ -55,8 +60,8 @@ public class MainPanel extends JPanel implements ActionListener {
         buttons.add(loadButton);
         buttons.add(saveButton);
         buttons.add(levelButton);
-        buttons.add(checkButton);
-        buttons.add(newButton);
+        buttons.add(logButton);
+        buttons.add(newTripButton);
         int y = 385;
         for (JButton next : buttons) {
             next.setBorderPainted(false);
@@ -72,19 +77,26 @@ public class MainPanel extends JPanel implements ActionListener {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the background of the panel
     @Override
     public void paintComponent(Graphics g) {
-
         g.drawImage(IMG, 0, 0, this);
     }
 
-
+    // EFFECTS: perform actions when a button is pressed
+    //          if the newTripButton is pressed, tells the gui to switch to a NewTripPanel
+    //          if the logButton is pressed, tells the gui to switch to a LogPanel
+    //          if the levelButton is pressed, tells the gui to switch to a LevelPanel
+    //          if the saveButton is pressed, tells the gui to switch to a SavePanel
+    //          if the loadButton is pressed, tells the gui to switch to a LoadPanel
+    //          if the exitButton is pressed, tells the gui to switch to a QuitPanel
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == newButton) {
+        if (e.getSource() == newTripButton) {
             GUI.switchToNewTripPanel();
         }
-        if (e.getSource() == checkButton) {
+        if (e.getSource() == logButton) {
             GUI.switchToLogPanel();
         }
         if (e.getSource() == levelButton) {
