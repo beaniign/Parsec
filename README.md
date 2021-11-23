@@ -60,6 +60,32 @@ it would make for an aesthetically pleasing graphical interface if done correctl
 Below is a sample of the events that may occur when Parsec runs:
 
 -----------
+Mon Nov 22 21:40:50 PST 2021  
+New trip to Moon added.
+
+Mon Nov 22 21:40:54 PST 2021  
+New trip to Mars added.
+
+Mon Nov 22 21:40:58 PST 2021  
+New trip to Jupiter added.
+
+Mon Nov 22 21:41:02 PST 2021  
+New trip to Saturn added.
+
+Mon Nov 22 21:41:07 PST 2021  
+New trip to Saturn added.
+
+Mon Nov 22 21:41:12 PST 2021  
+Trip at position 5 has been deleted.
+
+Mon Nov 22 21:41:14 PST 2021  
+Trip log cleared.
+
+Mon Nov 22 21:41:17 PST 2021  
+Trips saved.
+
+
+
 _New trip to Moon added.  
 New trip to Mars added.  
 New trip to Jupiter added.  

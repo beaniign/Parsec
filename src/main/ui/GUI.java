@@ -1,8 +1,7 @@
 package ui;
 
-import model.Colony;
-import model.Trip;
-import model.TripLog;
+import model.*;
+import model.Event;
 import model.exception.TripDoesNotExistException;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -143,7 +142,6 @@ public class GUI {
     private void loadTripLog() {
         try {
             log = jsonReader.read();
-            System.out.println("Loaded from your log book!");
             lvlSetupFromSaved();
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + SAVED_LOGS);
@@ -281,6 +279,9 @@ public class GUI {
             frame.getContentPane().add(new QuitPanel(this));
             frame.revalidate();
         } else {
+            for (Event next : EventLog.getInstance()) {
+                System.out.println(next + "\n");
+            }
             System.exit(0);
         }
     }
