@@ -1,5 +1,8 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -89,12 +92,21 @@ public class QuitPanel extends JPanel implements ActionListener {
             gui.switchBackToMain();
         }
         if (e.getSource() == noButton) {
+            for (Event next : EventLog.getInstance()) {
+                System.out.println(next.getDescription());
+            }
             System.exit(0);
         }
         if (e.getSource() == yesButton) {
             gui.saveTripLog();
+            for (Event next : EventLog.getInstance()) {
+                System.out.println(next.getDescription());
+            }
             System.exit(0);
         }
+        // is how this is called okay?
+        // will we have to deal with the fact when a user closes from the top right?
+        // should we include saved as an event, since load can't really be done so?
     }
 
 }

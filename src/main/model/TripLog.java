@@ -23,6 +23,8 @@ public class TripLog implements Writable {
     // EFFECTS:  adds a trip to the current trip log
     public void addTrip(Trip trip) {
         trips.add(trip);
+        String location = trip.location.substring(0, 1).toUpperCase() + trip.location.substring(1);
+        EventLog.getInstance().logEvent(new Event("New trip to " + location + " added."));
     }
 
     // EFFECTS: returns the trips inside trip log as a list of trips instead of a TripLog
@@ -49,6 +51,7 @@ public class TripLog implements Writable {
     // EFFECTS: removes all elements within a trip log
     public void clearTripLog() {
         trips.clear();
+        EventLog.getInstance().logEvent(new Event("Trip log cleared."));
     }
 
     public int logSize() {
@@ -64,6 +67,7 @@ public class TripLog implements Writable {
             throw new TripDoesNotExistException();
         } else {
             trips.remove(i);
+            EventLog.getInstance().logEvent(new Event("Trip at position " + (i + 1) + " has been deleted."));
         }
     }
 
@@ -71,10 +75,11 @@ public class TripLog implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("trips", tripsToJson());
+        EventLog.getInstance().logEvent(new Event("Trips saved."));
         return json;
     }
 
-    // EFFECTS: returns trips in this workroom as a JSON array
+    // EFFECTS: returns trips in this triplog as a JSON array
     private JSONArray tripsToJson() {
         JSONArray jsonArray = new JSONArray();
 

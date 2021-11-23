@@ -52,3 +52,20 @@ it would make for an aesthetically pleasing graphical interface if done correctl
 - As a user, I want to be able to save my trips as well as the levels of my colonies resulting from those trips
 - As a user, I want to be able to have the option of loading my saved trips from file
 - As a user, I want to be prompted to save my trips when I attempt to exit the program with unsaved edits
+
+
+###Phase 4
+**Task 2**
+
+Below is a sample of the events that may occur when Parsec runs:
+
+-----------
+_New trip to Moon added.  
+New trip to Mars added.  
+New trip to Jupiter added.  
+New trip to Saturn added.  
+New trip to Saturn added.  
+Trip at position 5 has been deleted.  
+Trip log cleared.  
+Trips saved._
+-----------

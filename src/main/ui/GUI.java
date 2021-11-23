@@ -187,7 +187,6 @@ public class GUI {
         } else {
             removePopulation(log.getTrip(index));
             log.deleteLogElement(index);
-            System.out.println("Your log entry has been deleted!");
             isSaved = false;
         }
     }
