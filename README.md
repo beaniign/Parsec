@@ -95,3 +95,23 @@ Trip at position 5 has been deleted.
 Trip log cleared.  
 Trips saved._
 -----------
+
+**Task 3**
+
+If I had more time to work on the project, the main design change / refactoring would center around the simplifying 
+my GUI code. As it stands right now, there is a lot of duplicated code across the multiple panels I have. I 
+believe I could create a superclass for the panels and have most of the styling done within that class, or have 
+helper methods that the subclasses can call to format a Swing component quickly without having too many lines of 
+code (i.e. a method in the superclass called styleButton that sets the size, border, font, font size, and font 
+colour of a button). 
+
+Another design change could be to have the states (i.e. levels and population) of my space colonies saved as well. 
+As of now, the levels and population are automatically set based on the current trips residing in the trip log when 
+it is loaded from file. This means that when a trip is removed from the trip log and then the user decides to save 
+to file, the population gained will also be removed from a colony (users will be warned when performing actions that 
+will cause this behaviour to occur).
+
+Lastly, the composite pattern could be added to Trips and TripLog as well. Basically, the main idea would be that 
+the user can have a library of trips, where they can take on imaginary forms of a folder of trips or a single sheet 
+containing a trip, and obviously within a folder of trip there could be more sub-folders of trips, satisfying the 
+composite pattern.

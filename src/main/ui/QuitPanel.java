@@ -108,6 +108,8 @@ public class QuitPanel extends JPanel implements ActionListener {
         // will we have to deal with the fact when a user closes from the top right?
         // do event & eventlog tests matter?
         // should we include the time of each event or is that not necessary?
+        // should we include classes that aren't used in phase 4 in our UML diagram?
+        // Persistence classes should be included as well right?
     }
 
 }
