@@ -222,19 +222,19 @@ public class NewTripPanel extends JPanel implements ActionListener {
     // EFFECTS: handles the time and note given by user, checks if they adhere to the rules based on the chosen
     //          location, if all conditions are meant, start the trip
     public void handleTripInput() {
-//        int minimumTime = 0; //<- use 0 as minimum for testing
-        int minimumTime = 15;
+        int minimumTime = 0; //<- use 0 as minimum for testing
+//        int minimumTime = 15;
         int maximumTime = 99;
         int inputTime = Integer.parseInt(duration.getText());
         switch (currentTrip) {
             case "Mars":
-                minimumTime = 30;
+//                minimumTime = 30;
                 break;
             case "Jupiter":
-                minimumTime = 45;
+//                minimumTime = 45;
                 break;
             case "Saturn":
-                minimumTime = 60;
+//                minimumTime = 60;
                 break;
         }
         if (inputTime < minimumTime || inputTime > maximumTime) {

@@ -85,15 +85,6 @@ Mon Nov 22 21:41:17 PST 2021
 Trips saved.
 
 
-
-_New trip to Moon added.  
-New trip to Mars added.  
-New trip to Jupiter added.  
-New trip to Saturn added.  
-New trip to Saturn added.  
-Trip at position 5 has been deleted.  
-Trip log cleared.  
-Trips saved._
 -----------
 
 **Task 3**
