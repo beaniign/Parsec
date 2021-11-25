@@ -111,6 +111,7 @@ public class QuitPanel extends JPanel implements ActionListener {
         // should we include classes that aren't used in phase 4 in our UML diagram?
         // Persistence classes should be included as well right?
         // is the 4 correct?
+        // aggregation between eventlog and event?
     }
 
 }
