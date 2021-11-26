@@ -53,13 +53,13 @@ it would make for an aesthetically pleasing graphical interface if done correctl
 - As a user, I want to be able to have the option of loading my saved trips from file
 - As a user, I want to be prompted to save my trips when I attempt to exit the program with unsaved edits
 
+---
 
 ###Phase 4
 **Task 2**
 
 Below is a sample of the events that may occur when Parsec runs:
 
------------
 Mon Nov 22 21:40:50 PST 2021  
 New trip to Moon added.
 
@@ -101,6 +101,10 @@ As of now, the levels and population are automatically set based on the current 
 it is loaded from file. This means that when a trip is removed from the trip log and then the user decides to save 
 to file, the population gained will also be removed from a colony (users will be warned when performing actions that 
 will cause this behaviour to occur).
+
+Furthermore, there is an association to the TripLog class from both the GUI and LogPanel class right now, I believe 
+I could refactor the code in a way that reduces coupling and makes it so only one of the two classes has an 
+association with the TripLog class. 
 
 Lastly, the composite pattern could be added to Trips and TripLog as well. Basically, the main idea would be that 
 the user can have a library of trips, where they can take on imaginary forms of a folder of trips or a single sheet 

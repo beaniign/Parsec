@@ -6,31 +6,22 @@ import java.util.Iterator;
 
 // This class references code from AlarmSystem
 // url: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
-/**
- * Represents a log of alarm system events.
- * We use the Singleton Design Pattern to ensure that there is only
- * one EventLog in the system and that the system has global access
- * to the single instance of the EventLog.
- */
+
+// represents a log of trip log events
+// the Singleton Design Pattern is used to ensure that there is only one EventLog in the system and that the system
+// has global access to the single instance of the EventLog
 public class EventLog implements Iterable<Event> {
-    /** the only EventLog in the system (Singleton Design Pattern) */
     private static EventLog theLog;
     private Collection<Event> events;
 
-    /**
-     * Prevent external construction.
-     * (Singleton Design Pattern).
-     */
+    // MODIFIES: this
+    // EFFECTS: Constructor / prevents external construction
     private EventLog() {
         events = new ArrayList<Event>();
     }
 
-    /**
-     * Gets instance of EventLog - creates it
-     * if it doesn't already exist.
-     * (Singleton Design Pattern)
-     * @return  instance of EventLog
-     */
+    // MODIFIES: this
+    // EFFECTS: gets instance of EventLog OR create it if it doesn't already exist
     public static EventLog getInstance() {
         if (theLog == null) {
             theLog = new EventLog();
@@ -39,22 +30,20 @@ public class EventLog implements Iterable<Event> {
         return theLog;
     }
 
-    /**
-     * Adds an event to the event log.
-     * @param e the event to be added
-     */
+    // MODIFIES: this
+    // EFFECTS: adds an event to the event log
     public void logEvent(Event e) {
         events.add(e);
     }
 
-    /**
-     * Clears the event log and logs the event.
-     */
+    // MODIFIES: this
+    // EFFECTS: clears the event log and logs the event
     public void clear() {
         events.clear();
         logEvent(new Event("Event log cleared."));
     }
 
+    // EFFECTS: iterates over the collection of events
     @Override
     public Iterator<Event> iterator() {
         return events.iterator();
