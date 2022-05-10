@@ -37,6 +37,8 @@ it has a relatively simple function yet does not mean it is rudimentary, and tha
 to use it if I had discovered it online. I also think that given the elements involves space and the different planets,
 it would make for an aesthetically pleasing graphical interface if done correctly.
 
+### Graphics
+All graphics used were created in Procreate on IOS and animated in Adobe Photoshop. Adobe Illustrator was used to created the Parsec logo.
 
 ### Future Development Ideas
 
