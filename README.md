@@ -1,4 +1,4 @@
-# Parsec
+# Parsec - An Interactive Study Tool
 
 ![Banner](Parsec_Banner.png)
 
