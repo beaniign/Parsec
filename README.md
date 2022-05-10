@@ -17,14 +17,10 @@ But of course a user can choose a more specific amount time (i.e. 35 minute) and
 
 ![UI](UI_Demo.png)
 
-**Progression System**
+### Progression System
 
 Every minute the user focuses for adds an astronaut to the trip. For example, a 30-minute trip to the Moon adds a 
-total of 30 astronauts to the Moon colony. Note that if one does not reach the required number of minutes to reach 
-a certain destination, they can instead choose a closer location to travel to, such as  a 75-minute trip to Jupiter 
-bringing 75 astronauts to the Jupiter colony as Saturn cannot be reached within 75 minutes. As the number of 
-astronauts on each colony grows, they level up. Each level requires an additional 100 astronauts, starting at level 
-0 with 0 astronauts. 
+total of 30 astronauts to the Moon colony. Colonies grow and level up as more and more astronauts arrive. Each level requires an additional 100 astronauts, and all of the colonies begin with level 0 and 0 astronauts. 
 
 
 ***Who will use Parsec?*** Parsec will be a user-friendly, minimalistic application. As such, people of 
