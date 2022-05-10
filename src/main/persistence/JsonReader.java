@@ -23,7 +23,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads trip log from file and returns it;
+    // EFFECTS: reads triplog from file and returns it;
     // throws IOException if an error occurs reading data from file
     public TripLog read() throws IOException {
         String jsonData = readFile(source);
@@ -42,7 +42,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses triplog from JSON object and returns it
     private TripLog parseTripLog(JSONObject jsonObject) {
         TripLog tl = new TripLog();
         addTrips(tl, jsonObject);
@@ -50,7 +50,7 @@ public class JsonReader {
     }
 
     // MODIFIES: tl
-    // EFFECTS: parses thingies from JSON object and adds them to trip log
+    // EFFECTS: parses trips from JSON object and adds them to triplog
     private void addTrips(TripLog tl, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("trips");
         for (Object json : jsonArray) {
@@ -60,7 +60,7 @@ public class JsonReader {
     }
 
     // MODIFIES: tl
-    // EFFECTS: parses thingy from JSON object and adds it to trip log
+    // EFFECTS: parses trips from JSON object and adds it to triplog
     private void addTrip(TripLog tl, JSONObject jsonObject) {
         int duration = jsonObject.getInt("duration");
         String location = jsonObject.getString("location");
