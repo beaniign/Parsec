@@ -1,5 +1,7 @@
 # Parsec
 
+![Banner](Parsec_Banner.png)
+
 ### Purpose
 **What will Parsec do?** Parsec will be an interactive focus tool for those who wish to give their 
 mundane work sessions a splash of colour. The central theme is space exploration, as the user sets timers to work or 
