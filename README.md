@@ -14,6 +14,7 @@ over time and makes the user's everyday life just a little more interesting.
 - it will take 45 minutes to reach Jupiter
 - it will take 60 minutes to reach Saturn
 
+![UI](UI_Demo.png)
 
 **Progression System**
 
