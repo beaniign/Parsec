@@ -1,6 +1,4 @@
-# My Personal Project - Ben Lu
-
-## Project Name: Parsec
+# Parsec
 
 ### Purpose
 **What will Parsec do?** Parsec will be an interactive focus tool for those who wish to give their 
@@ -25,20 +23,20 @@ astronauts on each colony grows, they level up. Each level requires an additiona
 0 with 0 astronauts. 
 
 
-**Who will use Parsec?** Parsec will be a user-friendly, minimalistic application. As such, people of 
+***Who will use Parsec?*** Parsec will be a user-friendly, minimalistic application. As such, people of 
 any age who are relatively experienced with basic computer operations should be able to access it easily. In terms of 
 who would want to use it, I believe good candidates will mainly be students and adults who strive for better 
 productivity, or even just someone who is a fan of space and wants another reason to focus better during their work 
 hours.
 
-**Why is this project of interest to you?** I have always been a big fan of space and have just recently started 
+***Why is this project of interest to you?*** I have always been a big fan of space and have just recently started 
 using various focus tools to help me stay on track during university life. I am interested in this project because 
 it has a relatively simple function yet does not mean it is rudimentary, and that I can actually see myself wanting 
 to use it if I had discovered it online. I also think that given the elements involves space and the different planets,
 it would make for an aesthetically pleasing graphical interface if done correctly.
 
 
-###Future Development Ideas
+### Future Development Ideas
 
 If I had more time to work on the project, the main design change / refactoring would center around the simplifying 
 my GUI code. As it stands right now, there is a lot of duplicated code across the multiple panels I have. I 
