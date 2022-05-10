@@ -13,6 +13,8 @@ This creates a sense of progression over time and makes the user's everyday life
 - it will take 45 minutes to reach Jupiter
 - it will take 60 minutes to reach Saturn
 
+But of course a user can choose a more specific amount time (i.e. 35 minute) and will be able to travel to any of the location that has a time requirement less than that (in this case both the Moon and Mars).
+
 ![UI](UI_Demo.png)
 
 **Progression System**
