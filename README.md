@@ -24,7 +24,6 @@ bringing 75 astronauts to the Jupiter colony as Saturn cannot be reached within 
 astronauts on each colony grows, they level up. Each level requires an additional 100 astronauts, starting at level 
 0 with 0 astronauts. 
 
-### Target Demographic
 
 **Who will use Parsec?** Parsec will be a user-friendly, minimalistic application. As such, people of 
 any age who are relatively experienced with basic computer operations should be able to access it easily. In terms of 
@@ -39,55 +38,7 @@ to use it if I had discovered it online. I also think that given the elements in
 it would make for an aesthetically pleasing graphical interface if done correctly.
 
 
-###USER STORIES
-**PHASE 1**
-
-- As a user, I want to be able to set a count-down timer / create a new trip 
-- As a user, I want to be able to choose the destination of each trip
-- As a user, I want to be able to add my trips to my trip logs
-- As a user, I want to be able to see my trip logs and edit them
-- As a user, I want to be able to see the levels of my colonies
-
-**PHASE 2**
-- As a user, I want to be able to save my trips as well as the levels of my colonies resulting from those trips
-- As a user, I want to be able to have the option of loading my saved trips from file
-- As a user, I want to be prompted to save my trips when I attempt to exit the program with unsaved edits
-
----
-
-###Phase 4
-**Task 2**
-
-Below is a sample of the events that may occur when Parsec runs:
-
-Mon Nov 22 21:40:50 PST 2021  
-New trip to Moon added.
-
-Mon Nov 22 21:40:54 PST 2021  
-New trip to Mars added.
-
-Mon Nov 22 21:40:58 PST 2021  
-New trip to Jupiter added.
-
-Mon Nov 22 21:41:02 PST 2021  
-New trip to Saturn added.
-
-Mon Nov 22 21:41:07 PST 2021  
-New trip to Saturn added.
-
-Mon Nov 22 21:41:12 PST 2021  
-Trip at position 5 has been deleted.
-
-Mon Nov 22 21:41:14 PST 2021  
-Trip log cleared.
-
-Mon Nov 22 21:41:17 PST 2021  
-Trips saved.
-
-
------------
-
-**Task 3**
+###Future Development Ideas
 
 If I had more time to work on the project, the main design change / refactoring would center around the simplifying 
 my GUI code. As it stands right now, there is a lot of duplicated code across the multiple panels I have. I 
