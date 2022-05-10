@@ -3,10 +3,9 @@
 ![Banner](Parsec_Banner.png)
 
 ### Purpose
-**What will Parsec do?** Parsec will be an interactive focus tool for those who wish to give their 
-mundane work sessions a splash of colour. The central theme is space exploration, as the user sets timers to work or 
-study, virtual astronauts can be sent to various colonies in our solar system. This creates a sense of progression 
-over time and makes the user's everyday life just a little more interesting.
+**What will Parsec do?** Parsec is a focus tool for those who wish to give their mundane work sessions a splash of colour. 
+The central theme is space exploration, as the user sets timers to work or study, virtual astronauts can be sent to various colonies in our solar system. 
+This creates a sense of progression over time and makes the user's everyday life just a little more interesting.
 
 **Time required for each colony:**
 - it will take 15 minutes to reach the Moon
