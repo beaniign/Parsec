@@ -64,16 +64,22 @@ public class MainPanel extends JPanel implements ActionListener {
         buttons.add(newTripButton);
         int y = 385;
         for (JButton next : buttons) {
+            next.setBackground(DARK_GRAY);
             next.setBorderPainted(false);
-            next.setForeground(Color.white);
-            next.setFont(font.deriveFont(22f));
+            next.setForeground(LIGHT_GRAY);
+            next.setFont(font.deriveFont(18f));
             next.setFocusPainted(false);
-            next.setOpaque(false);
-            next.setHorizontalAlignment(SwingConstants.LEFT);
-            next.setContentAreaFilled(false);
-            next.setBounds(20, y, 260, 40);
+            next.setBounds(60, y, 180, 30);
             next.addActionListener(this);
-            y -= 30;
+            y -= 40;
+//            next.setBorderPainted(false);
+//            next.setForeground(Color.white);
+//            next.setFont(font.deriveFont(22f));
+//            next.setFocusPainted(false);
+//            next.setOpaque(false);
+//            next.setHorizontalAlignment(SwingConstants.LEFT);
+//            next.setContentAreaFilled(false);
+//            next.setBounds(20, y, 260, 40);
         }
     }
 
